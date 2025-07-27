@@ -39,3 +39,20 @@ categories: ['Rails']
     - Asssembly, Eleven Labs, Deepgram
       - These are either good for TTS and STT
       - None of these have a direct ruby client and will need to be investigated individually as for how to implement.
+     
+
+## Implementation with OpenAI and Websockets
+
+- There are three important js files:
+  - voice_chat_ai_manager.js
+  - audio_manager.js
+  - voice_chat_ai_channel.js
+  - realtime_controller.js
+- There are also corresponding rb files
+  - voice_chat_ai_channel.rb
+   
+
+### Doubts
+
+- audio management is done in audio_manager and is also done in voice_chat_ai_manager. Is it required in both?
+- there are many unused variables in voice_chat_ai_manager. can we remove those?
