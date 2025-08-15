@@ -1,14 +1,91 @@
 /* Custom styles for improved blog design */
 
+/* ===== ENHANCED COLOR VARIABLES ===== */
+
+:root {
+  /* Enhanced code block colors - darker, more code-like backgrounds */
+  --code-block-bg: #282c34;
+  --code-text-color: #abb2bf;
+  --code-border-color: rgba(171, 178, 191, 0.2);
+  --code-lang-bg: rgba(97, 175, 239, 0.9);
+  --code-lang-color: #ffffff;
+  --code-line-bg: rgba(0, 0, 0, 0.2);
+  --code-line-border: rgba(171, 178, 191, 0.1);
+  --code-line-number: #5c6370;
+  --scrollbar-track: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb: rgba(171, 178, 191, 0.3);
+  --scrollbar-thumb-hover: rgba(171, 178, 191, 0.5);
+
+  /* Inline code colors */
+  --inline-code-bg: rgba(52, 152, 219, 0.08);
+  --inline-code-color: #2c3e50;
+  --inline-code-border: rgba(52, 152, 219, 0.15);
+
+  /* Syntax highlighting colors - optimized for dark code background */
+  --syntax-keyword: #c678dd;
+  --syntax-string: #98c379;
+  --syntax-number: #d19a66;
+  --syntax-comment: #5c6370;
+  --syntax-name: #e06c75;
+  --syntax-function: #61afef;
+  --syntax-class: #e5c07b;
+  --syntax-operator: #56b6c2;
+  --syntax-punctuation: #abb2bf;
+  --syntax-deleted: #e06c75;
+  --syntax-deleted-bg: rgba(224, 108, 117, 0.2);
+  --syntax-inserted: #98c379;
+  --syntax-inserted-bg: rgba(152, 195, 121, 0.2);
+  --syntax-error: #e06c75;
+  --syntax-error-bg: rgba(224, 108, 117, 0.2);
+
+  /* Subtle accent colors */
+  --accent-primary: #3498db;
+  --accent-primary-light: rgba(52, 152, 219, 0.1);
+  --accent-secondary: #2ecc71;
+  --accent-secondary-light: rgba(46, 204, 113, 0.1);
+  --accent-warning: #f39c12;
+  --accent-warning-light: rgba(243, 156, 18, 0.1);
+
+  /* Enhanced card colors */
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: rgba(0, 0, 0, 0.12);
+}
+
+/* Dark mode color overrides - even darker for better contrast */
+[data-mode="dark"] {
+  --code-block-bg: #1e2127;
+  --code-text-color: #abb2bf;
+  --code-border-color: rgba(171, 178, 191, 0.15);
+  --code-lang-bg: rgba(97, 175, 239, 0.8);
+  --code-lang-color: #ffffff;
+  --code-line-bg: rgba(0, 0, 0, 0.3);
+  --code-line-border: rgba(171, 178, 191, 0.1);
+  --code-line-number: #5c6370;
+  --scrollbar-track: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb: rgba(171, 178, 191, 0.2);
+  --scrollbar-thumb-hover: rgba(171, 178, 191, 0.4);
+
+  --inline-code-bg: rgba(40, 44, 52, 0.8);
+  --inline-code-color: #abb2bf;
+  --inline-code-border: rgba(171, 178, 191, 0.2);
+
+  --card-bg: #2d3748;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --card-hover-shadow: rgba(0, 0, 0, 0.4);
+}
+
 /* ===== LAYOUT IMPROVEMENTS ===== */
 
 /* Improved spacing for post content */
 .post-content {
   max-width: none;
-  
+
   .post-header {
     margin-bottom: 3rem;
-    
+
     .post-title {
       font-size: 2.5rem;
       font-weight: 700;
@@ -16,50 +93,50 @@
       margin-bottom: 1rem;
       color: var(--heading-color);
     }
-    
+
     .post-desc {
       font-size: 1.1rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
     }
-    
+
     .post-meta {
       font-size: 0.9rem;
       padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border-color);
-      
+
       .post-date, .post-read-time {
         color: var(--text-muted);
       }
     }
   }
-  
+
   .content {
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 3rem;
-    
+
     /* Better paragraph spacing */
     p {
       margin-bottom: 1.5rem;
     }
-    
+
     /* Better heading spacing */
     h1, h2, h3, h4, h5, h6 {
       margin-top: 2.5rem;
       margin-bottom: 1rem;
       font-weight: 600;
     }
-    
+
     h1 { font-size: 2rem; }
     h2 { font-size: 1.75rem; }
     h3 { font-size: 1.5rem; }
     h4 { font-size: 1.25rem; }
-    
+
     /* Better list spacing */
     ul, ol {
       margin-bottom: 1.5rem;
-      
+
       li {
         margin-bottom: 0.5rem;
       }
@@ -69,48 +146,97 @@
 
 /* ===== CODE BLOCK IMPROVEMENTS ===== */
 
-/* Enhanced code block styling */
-.highlight {
+/* Enhanced code block styling - works with both Jekyll highlight and WordPress HTML blocks */
+.highlight,
+.wp-block-code,
+pre.wp-block-code,
+pre[class*="wp-block-code"],
+pre.wp-block-syntaxhighlighter-code,
+pre[class*="syntaxhighlighter"] {
   margin: 2rem 0;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: 1px solid var(--code-border-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  
-  pre {
+  position: relative;
+  background: var(--code-block-bg);
+
+  /* Language label */
+  &[data-lang]::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--code-lang-bg);
+    color: var(--code-lang-color);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  pre,
+  code {
     margin: 0;
     padding: 1.5rem;
     font-size: 0.9rem;
-    line-height: 1.5;
-    font-family: 'SFMono-Regular', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
-    background: var(--code-bg);
+    line-height: 1.6;
+    font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+    background: transparent;
     overflow-x: auto;
+    color: var(--code-text-color);
+    border: none;
+    border-radius: 0;
+
+    /* Better scrollbar styling */
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 4px;
+
+      &:hover {
+        background: var(--scrollbar-thumb-hover);
+      }
+    }
   }
-  
-  /* Line numbers styling */
+
+  /* Line numbers styling for Jekyll highlight blocks */
   table {
     margin: 0;
     width: 100%;
-    
+
     td {
       padding: 0;
       border: none;
-      
+
       &:first-child {
-        width: 3rem;
+        width: 3.5rem;
         text-align: right;
         padding-right: 1rem;
         padding-left: 1rem;
-        background: var(--code-line-bg, rgba(0, 0, 0, 0.05));
-        border-right: 1px solid var(--border-color);
+        background: var(--code-line-bg);
+        border-right: 1px solid var(--code-line-border);
         user-select: none;
-        
+
         .lineno {
-          color: var(--text-muted);
+          color: var(--code-line-number);
           font-size: 0.8rem;
+          font-weight: 400;
         }
       }
-      
+
       &:last-child {
         padding: 1.5rem;
         padding-left: 1rem;
@@ -119,22 +245,422 @@
   }
 }
 
+/* Specific styling for WordPress code blocks */
+.wp-block-code,
+pre.wp-block-code,
+pre[class*="wp-block-code"],
+pre.wp-block-syntaxhighlighter-code,
+pre[class*="syntaxhighlighter"] {
+  /* Ensure the pre element itself gets the styling */
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+
+  pre {
+    white-space: pre;
+    word-wrap: normal;
+    overflow-x: auto;
+  }
+
+  code {
+    display: block;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border: none;
+    white-space: pre;
+  }
+}
+
+/* Ensure WordPress block containers don't interfere */
+.wp-block-group .wp-block-group__inner-container {
+  .wp-block-code,
+  pre.wp-block-code,
+  pre[class*="wp-block-code"] {
+    margin: 2rem 0;
+  }
+}
+
+/* Force styling on all pre elements with wp-block-code class */
+pre[class="wp-block-code"],
+pre[class="wp-block-syntaxhighlighter-code"],
+pre[class*="language-"] {
+  margin: 2rem 0 !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--code-border-color) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: var(--code-block-bg) !important;
+  padding: 1.5rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace !important;
+  color: var(--code-text-color) !important;
+  white-space: pre !important;
+  overflow-x: auto !important;
+
+  code {
+    background: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    font-family: inherit !important;
+    white-space: pre !important;
+  }
+}
+
+/* Ensure proper spacing around code blocks in content */
+.content {
+  .highlight,
+  .wp-block-code,
+  pre.wp-block-code,
+  pre[class*="wp-block-code"],
+  pre.wp-block-syntaxhighlighter-code,
+  pre[class*="syntaxhighlighter"] {
+    margin: 2rem 0;
+
+    /* Add extra spacing when following headings */
+    h1 + &,
+    h2 + &,
+    h3 + &,
+    h4 + &,
+    h5 + &,
+    h6 + & {
+      margin-top: 1.5rem;
+    }
+
+    /* Add extra spacing when preceding headings */
+    & + h1,
+    & + h2,
+    & + h3,
+    & + h4,
+    & + h5,
+    & + h6 {
+      margin-top: 3rem;
+    }
+  }
+}
+
 /* Inline code styling */
 code {
-  background: var(--inline-code-bg, rgba(175, 184, 193, 0.2));
-  color: var(--inline-code-color, #e74c3c);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
+  background: var(--inline-code-bg, rgba(52, 152, 219, 0.08));
+  color: var(--inline-code-color, #2c3e50);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
   font-size: 0.9em;
-  font-family: 'SFMono-Regular', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+  border: 1px solid var(--inline-code-border, rgba(52, 152, 219, 0.15));
+  font-weight: 500;
 }
 
 /* Code blocks without line numbers */
 .highlighter-rouge {
   margin: 1.5rem 0;
-  
+
   .highlight {
     margin: 0;
+  }
+}
+
+/* ===== ENHANCED SYNTAX HIGHLIGHTING COLORS ===== */
+
+/* Override Prism.js theme with our custom colors */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--code-text-color) !important;
+  background: transparent !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  text-shadow: none !important;
+}
+
+/* Prism syntax highlighting colors - matching our theme */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--syntax-comment) !important;
+  font-style: italic !important;
+}
+
+.token.punctuation {
+  color: var(--syntax-punctuation) !important;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--syntax-number) !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--syntax-string) !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: var(--syntax-operator) !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--syntax-keyword) !important;
+  font-weight: 600 !important;
+}
+
+.token.function,
+.token.class-name {
+  color: var(--syntax-function) !important;
+  font-weight: 500 !important;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--syntax-class) !important;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold !important;
+}
+
+.token.italic {
+  font-style: italic !important;
+}
+
+.token.entity {
+  cursor: help !important;
+}
+
+/* Rouge syntax highlighting theme - Custom enhanced theme */
+.highlight {
+  /* Keywords */
+  .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv {
+    color: var(--syntax-keyword, #8e44ad);
+    font-weight: 600;
+  }
+
+  /* Strings */
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx {
+    color: var(--syntax-string, #27ae60);
+  }
+
+  /* Numbers */
+  .m, .mf, .mh, .mi, .mo {
+    color: var(--syntax-number, #e67e22);
+  }
+
+  /* Comments */
+  .c, .c1, .cm, .cp, .cs {
+    color: var(--syntax-comment, #95a5a6);
+    font-style: italic;
+  }
+
+  /* Names and identifiers */
+  .n, .na, .nb, .nc, .nd, .ne, .nf, .ni, .nl, .nn, .no, .nt, .nv, .nx, .py {
+    color: var(--syntax-name, #2c3e50);
+  }
+
+  /* Functions */
+  .nf {
+    color: var(--syntax-function, #3498db);
+    font-weight: 500;
+  }
+
+  /* Classes */
+  .nc {
+    color: var(--syntax-class, #9b59b6);
+    font-weight: 500;
+  }
+
+  /* Operators */
+  .o, .ow {
+    color: var(--syntax-operator, #e74c3c);
+    font-weight: 500;
+  }
+
+  /* Punctuation */
+  .p {
+    color: var(--syntax-punctuation, #34495e);
+  }
+
+  /* Generic (diffs, etc.) */
+  .gd {
+    background-color: var(--syntax-deleted-bg, rgba(231, 76, 60, 0.1));
+    color: var(--syntax-deleted, #e74c3c);
+  }
+
+  .gi {
+    background-color: var(--syntax-inserted-bg, rgba(39, 174, 96, 0.1));
+    color: var(--syntax-inserted, #27ae60);
+  }
+
+  /* Error highlighting */
+  .err {
+    color: var(--syntax-error, #e74c3c);
+    background-color: var(--syntax-error-bg, rgba(231, 76, 60, 0.1));
+  }
+}
+
+/* ===== DARK MODE SYNTAX HIGHLIGHTING ===== */
+
+[data-mode="dark"] {
+  .highlight {
+    background: var(--code-block-bg-dark, #1e1e1e);
+    border-color: var(--code-border-color-dark, rgba(255, 255, 255, 0.1));
+
+    /* Language label for dark mode */
+    &[data-lang]::before {
+      background: var(--code-lang-bg-dark, rgba(52, 152, 219, 0.2));
+      color: var(--code-lang-color-dark, #5dade2);
+    }
+
+    /* Line numbers for dark mode */
+    table td:first-child {
+      background: var(--code-line-bg-dark, rgba(255, 255, 255, 0.03));
+      border-right-color: var(--code-line-border-dark, rgba(255, 255, 255, 0.08));
+
+      .lineno {
+        color: var(--code-line-number-dark, #6c757d);
+      }
+    }
+
+    /* Dark mode syntax colors */
+    .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv { color: #bb86fc; }
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx { color: #a5d6a7; }
+    .m, .mf, .mh, .mi, .mo { color: #ffb74d; }
+    .c, .c1, .cm, .cp, .cs { color: #6c757d; }
+    .n, .na, .nb, .nc, .nd, .ne, .nf, .ni, .nl, .nn, .no, .nt, .nv, .nx, .py { color: #e1e1e1; }
+    .nf { color: #81d4fa; }
+    .nc { color: #ce93d8; }
+    .o, .ow { color: #ff8a65; }
+    .p { color: #b0bec5; }
+    .gd {
+      background-color: rgba(244, 67, 54, 0.15);
+      color: #ef5350;
+    }
+    .gi {
+      background-color: rgba(76, 175, 80, 0.15);
+      color: #81c784;
+    }
+    .err {
+      color: #ef5350;
+      background-color: rgba(244, 67, 54, 0.15);
+    }
+  }
+
+  /* Dark mode inline code */
+  code {
+    background: var(--inline-code-bg-dark, rgba(255, 255, 255, 0.08));
+    color: var(--inline-code-color-dark, #e1e1e1);
+    border-color: var(--inline-code-border-dark, rgba(255, 255, 255, 0.15));
+  }
+}
+
+/* ===== COPY CODE BUTTON ===== */
+
+.highlight,
+.wp-block-code,
+pre.wp-block-code,
+pre[class*="wp-block-code"],
+pre.wp-block-syntaxhighlighter-code,
+pre[class*="syntaxhighlighter"] {
+  &:hover .copy-code-btn {
+    opacity: 1;
+  }
+}
+
+.copy-code-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(97, 175, 239, 0.9);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 15;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &:hover {
+    background: rgba(97, 175, 239, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Success state */
+  &.copied {
+    background: rgba(152, 195, 121, 0.9);
+
+    &:hover {
+      background: rgba(152, 195, 121, 1);
+    }
+  }
+
+  /* Error state */
+  &.error {
+    background: rgba(224, 108, 117, 0.9);
+
+    &:hover {
+      background: rgba(224, 108, 117, 1);
+    }
+  }
+}
+
+/* Dark mode copy button adjustments */
+[data-mode="dark"] .copy-code-btn {
+  background: rgba(97, 175, 239, 0.8);
+
+  &:hover {
+    background: rgba(97, 175, 239, 1);
+  }
+
+  &.copied {
+    background: rgba(152, 195, 121, 0.8);
+
+    &:hover {
+      background: rgba(152, 195, 121, 1);
+    }
+  }
+
+  &.error {
+    background: rgba(224, 108, 117, 0.8);
+
+    &:hover {
+      background: rgba(224, 108, 117, 1);
+    }
   }
 }
 
@@ -143,34 +669,55 @@ code {
 .home-post-card {
   margin-bottom: 2rem;
   border-radius: 12px;
-  border: 1px solid var(--card-border-color);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: 0 2px 12px var(--card-shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 20px var(--card-hover-shadow);
   }
-  
+
   .card-body {
     padding: 2rem;
-    
+
     .card-title {
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1rem;
       color: var(--heading-color);
+
+      /* Add subtle accent on hover */
+      &:hover {
+        color: var(--accent-primary);
+        transition: color 0.2s ease;
+      }
     }
-    
+
     .card-text {
       font-size: 1rem;
       line-height: 1.6;
       color: var(--text-color);
     }
-    
+
     .post-meta {
       font-size: 0.9rem;
       color: var(--text-muted);
+
+      .post-date {
+        &::before {
+          content: "📅 ";
+          margin-right: 0.2rem;
+        }
+      }
+
+      .post-read-time {
+        &::before {
+          content: "⏱️ ";
+          margin-right: 0.2rem;
+        }
+      }
     }
   }
 }
@@ -184,35 +731,35 @@ code {
         font-size: 2rem;
       }
     }
-    
+
     .content {
       font-size: 1rem;
-      
+
       h1 { font-size: 1.75rem; }
       h2 { font-size: 1.5rem; }
       h3 { font-size: 1.25rem; }
       h4 { font-size: 1.1rem; }
     }
   }
-  
+
   .highlight {
     margin: 1.5rem -1rem;
     border-radius: 0;
     border-left: none;
     border-right: none;
-    
+
     pre {
       padding: 1rem;
       font-size: 0.8rem;
     }
-    
+
     table td {
       &:first-child {
         width: 2.5rem;
         padding-right: 0.5rem;
         padding-left: 0.5rem;
       }
-      
+
       &:last-child {
         padding: 1rem 0.5rem;
       }
@@ -224,19 +771,64 @@ code {
 
 .category-link, .post-tag {
   display: inline-block;
-  padding: 0.2rem 0.6rem;
-  margin: 0.1rem 0.2rem 0.1rem 0;
-  background: var(--tag-bg, rgba(52, 152, 219, 0.1));
-  color: var(--tag-color, #3498db);
-  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+  margin: 0.2rem 0.3rem 0.2rem 0;
+  background: var(--accent-primary-light);
+  color: var(--accent-primary);
+  border: 1px solid transparent;
+  border-radius: 20px;
   font-size: 0.8rem;
+  font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
-  
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
   &:hover {
-    background: var(--tag-hover-bg, rgba(52, 152, 219, 0.2));
-    color: var(--tag-hover-color, #2980b9);
+    background: var(--accent-primary);
+    color: white;
     text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    border-color: var(--accent-primary);
+
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+/* Different colors for different categories */
+.category-link {
+  &[href*="ruby"], &[href*="rails"] {
+    background: var(--accent-secondary-light);
+    color: var(--accent-secondary);
+
+    &:hover {
+      background: var(--accent-secondary);
+      box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+    }
+  }
+
+  &[href*="javascript"], &[href*="js"] {
+    background: var(--accent-warning-light);
+    color: var(--accent-warning);
+
+    &:hover {
+      background: var(--accent-warning);
+      box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+    }
   }
 }
 
@@ -251,7 +843,7 @@ code {
     width: 100%;
     text-align: center;
   }
-  
+
   body:not(.home-layout) #main-wrapper .container {
     padding-left: 1rem;
   }
