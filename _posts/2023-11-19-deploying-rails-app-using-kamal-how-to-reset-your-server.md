@@ -12,9 +12,9 @@ categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rai
 <h2 class="wp-block-heading">Step 1: Remove kamal</h2>
 <!-- /wp:heading -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>kamal remove</code></pre>
-<!-- /wp:code -->
+```
+kamal remove
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -26,9 +26,9 @@ categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rai
 <h2 class="wp-block-heading">Step 2: Setup Kamal</h2>
 <!-- /wp:heading -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>kamal setup</code></pre>
-<!-- /wp:code -->
+```
+kamal setup
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->

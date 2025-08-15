@@ -40,15 +40,15 @@ categories: ['Uncategorized']
 <p class="">If you see in the above image, we use puma as a web server for processing requests. Puma is a web server which allows you to process several requests in parallel. How Puma does this is using workers and threads. The difference between workers and threads is that a worker is a different OS process whereas a thread is a single execution flow inside the process. So, let's say our request comes to a Heroku dyno (which is a Linux container in a server or VM), there will be different processes inside this container which are also known as <code>Puma Workers</code>. Multiple workers can process request at a time since those are different OS processes. This is how we specify the number of workers in our Puma config:<br></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code># Specifies the number of `workers` to boot in clustered mode.
+```
+# Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers ENV.fetch('WEB_CONCURRENCY') { 2 }</code></pre>
-<!-- /wp:code -->
+workers ENV.fetch('WEB_CONCURRENCY') { 2 }
+```
 
 <!-- wp:paragraph -->
 <p class="">Note that the default configuration is 2 workers. However, it is not mandatory. If we set this to 1, it will mean that only one OS process caters to the request inside a dyno.</p>
@@ -62,8 +62,8 @@ workers ENV.fetch('WEB_CONCURRENCY') { 2 }</code></pre>
 <p class="">Now, we briefly touched upon Puma threads earlier when we said Puma has two ways to achieve concurrency: processes and threads. Puma threads are nothing but regular threads inside a single process. Typically, there are 5 (default) threads inside a single process and each thread can handle a web request independently. This is how the configuration looks like in <code>config/puma.rb</code></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code># Puma can serve each request in a thread from an internal thread pool.
+```css
+# Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
@@ -71,8 +71,8 @@ workers ENV.fetch('WEB_CONCURRENCY') { 2 }</code></pre>
 #
 max_threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { max_threads_count }
-threads min_threads_count, max_threads_count</code></pre>
-<!-- /wp:code -->
+threads min_threads_count, max_threads_count
+```
 
 <!-- wp:paragraph -->
 <p class=""></p>

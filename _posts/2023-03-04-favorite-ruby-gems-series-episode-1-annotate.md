@@ -58,8 +58,8 @@ categories: ['annotate', 'annotate gem', 'Favorite Ruby Gems', 'rails annotate g
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code># Add gem to your gemfile
+```
+# Add gem to your gemfile
 
 group :development do
   gem 'annotate'
@@ -72,8 +72,8 @@ bundle install
 bundle exec annotate --models
 
 # Create annotate config file so that we can always annotate on running migrations (Optional)
-bundle exec rails g annotate:install</code></pre>
-<!-- /wp:code -->
+bundle exec rails g annotate:install
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->

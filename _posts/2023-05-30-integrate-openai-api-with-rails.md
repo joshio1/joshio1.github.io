@@ -36,10 +36,10 @@ categories: ['ChatGPT', 'OpenAI', 'OpenAIAPI', 'Rails', 'Rails ChatGPT', 'Rails 
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code># OpenAI library
-gem "ruby-openai"</code></pre>
-<!-- /wp:code -->
+```
+# OpenAI library
+gem "ruby-openai"
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -57,22 +57,22 @@ gem "ruby-openai"</code></pre>
 <!-- /wp:list-item --></ol>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class Ai
+```ruby
+class Ai
   def self.answer(prompt:)
     client = OpenAI::Client.new(access_token: Rails.application.credentials.fetch(:open_ai_secret_key))
 
     response = client.chat(
       parameters: {
         model: "gpt-3.5-turbo", # Required.
-        messages: &#91;{ role: "user", content: prompt}], # Required.
+        messages: [{ role: "user", content: prompt}], # Required.
         temperature: 0.7,
       })
 
     response.dig("choices", 0, "message", "content")
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -92,8 +92,8 @@ end</code></pre>
 <p>     2. Create a class which is specific to the business logic of your app. Something like: <code>app/models/my_app_ai.rb</code></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class MyAppAi
+```ruby
+class MyAppAi
   def initialize(question:, current_user:)
     @question = question
     @current_user = current_user
@@ -114,8 +114,8 @@ end</code></pre>
       "For a person who is a #{@current_user.profession} professional, "
     end
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:list {"ordered":true} -->
 <ol><!-- wp:list-item -->
