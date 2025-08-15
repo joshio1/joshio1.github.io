@@ -190,6 +190,25 @@ a.sidebar-nav-item:focus {
   border-color: transparent;
 }
 
+/* Sidebar sections */
+.sidebar-section {
+  margin-top: 1rem;
+}
+.sidebar-section-title {
+  color: rgba(255,255,255,.8);
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  margin: 0 1rem .5rem;
+  padding-top: .5rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.sidebar-section:first-child .sidebar-section-title {
+  border-top: none;
+  padding-top: 0;
+}
+
 @media (min-width: 48em) {
   .sidebar-item {
     padding: 1.5rem;
