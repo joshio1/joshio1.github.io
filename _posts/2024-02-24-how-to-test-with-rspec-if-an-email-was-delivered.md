@@ -4,24 +4,12 @@ date: 2024-02-24 11:43:30
 categories: ['Rails', 'Rails', 'ruby on rails', 'RubyOnRails']
 ---
 
-<!-- wp:paragraph -->
-<p class="">Many times, we would like to validate if a class or a method sends an email. We don't wanna worry too much about the specific details (i.e. body, subject, from, to) of the email but just wanna ensure that a certain mailer method is invoked with certain arguments.</p>
-<!-- /wp:paragraph -->
+Many times, we would like to validate if a class or a method sends an email. We don't wanna worry too much about the specific details (i.e. body, subject, from, to) of the email but just wanna ensure that a certain mailer method is invoked with certain arguments.
 
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
+## This is how you can do it in <a href="https://rspec.info/">Rspec</a>:
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">This is how you can do it in <a href="https://rspec.info/">Rspec</a>:</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code">RSpec.describe UserWelcomeWorker, type: :worker do
+```ruby
+RSpec.describe UserWelcomeWorker, type: :worker do
   let(:message_delivery) { instance_double(ActionMailer::MessageDelivery)}
 
   before do
@@ -34,19 +22,13 @@ categories: ['Rails', 'Rails', 'ruby on rails', 'RubyOnRails']
 
      expect(UserMailer).to have_received(:send_welcome_email).with(user).once
   end
-end</pre>
-<!-- /wp:syntaxhighlighter/code -->
+end
+```
 
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
+## A Better Way:  Writing Custom Matcher
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">A Better Way:  Writing Custom Matcher</h2>
-<!-- /wp:heading -->
-
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code">#spec/support/matchers/send_email_with.rb
+```ruby
+#spec/support/matchers/send_email_with.rb
 
 RSpec::Matchers.define :send_email_with do |mailer, mailer_method, args = anything|
   match do |block|
@@ -76,31 +58,12 @@ it 'sends welcome email to users' do
   expect {
     described_class.new.perform(user)
   }.to send_email_with(UserMailer, :send_welcome_email, user)
-end</pre>
-<!-- /wp:syntaxhighlighter/code -->
+end
+```
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">What this does not cover?</h2>
-<!-- /wp:heading -->
+## What this does not cover?
 
-<!-- wp:list -->
-<ul class=""><!-- wp:list-item -->
-<li class="">If an email was scheduled to be sent using <code>deliver_later</code></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li class="">If an email was invoked using the <code>with</code> syntax like: <code>UserMailer.with(user: user).send_welcome_email</code></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li class="">This does not include validation of the actual contents of the email including subject, email, body, from, to email address. We use mailer specs for that.</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li class="">This only shows an example in Rspec. We can follow the same approach for Minitest.</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
+- If an email was scheduled to be sent using `deliver_later`
+- If an email was invoked using the `with` syntax like: `UserMailer.with(user: user).send_welcome_email`
+- This does not include validation of the actual contents of the email including subject, email, body, from, to email address. We use mailer specs for that.
+- This only shows an example in Rspec. We can follow the same approach for Minitest.
