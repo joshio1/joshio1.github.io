@@ -200,6 +200,17 @@ a code {
 
 /* ===== HOME PAGE IMPROVEMENTS ===== */
 
+/* Narrower content width for home page posts */
+.home-layout #main-wrapper .container {
+  max-width: 900px; /* Constrain the overall container width */
+}
+
+.home-layout #post-list {
+  max-width: 800px; /* Further constrain the post list */
+  margin: 0 auto; /* Center the content */
+  padding: 0 1rem; /* Add some padding for mobile */
+}
+
 .home-post-card {
   margin-bottom: 2rem;
   border-radius: 12px;
@@ -238,6 +249,16 @@ a code {
 /* ===== RESPONSIVE IMPROVEMENTS ===== */
 
 @media (max-width: 768px) {
+  /* Adjust home layout for mobile */
+  .home-layout #main-wrapper .container {
+    max-width: 100%;
+  }
+
+  .home-layout #post-list {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
   .post-content {
     .post-header {
       .post-title {
@@ -278,8 +299,17 @@ a code {
       }
     }
   }
+}
 
+/* Medium screens - tablet size */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-layout #main-wrapper .container {
+    max-width: 750px;
+  }
 
+  .home-layout #post-list {
+    max-width: 700px;
+  }
 }
 
 /* ===== CATEGORY AND TAG STYLING ===== */
