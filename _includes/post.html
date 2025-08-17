@@ -1,0 +1,80 @@
+<!-- Initialize Chirpy's copy button functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if the copy button initialization function exists and call it
+  if (typeof un === 'function') {
+    un(); // This is Chirpy's copy button initialization function
+  } else {
+    // Fallback: manually initialize copy buttons if the function doesn't exist
+    console.log('Initializing copy buttons manually...');
+    
+    const copyButtons = document.querySelectorAll('.code-header>button');
+    if (copyButtons.length === 0) return;
+    
+    // Check if ClipboardJS is available
+    if (typeof ClipboardJS !== 'undefined') {
+      // Initialize ClipboardJS for copy buttons
+      const clipboard = new ClipboardJS('.code-header>button', {
+        target: function(trigger) {
+          return trigger.parentNode.nextElementSibling.querySelector('code .rouge-code');
+        }
+      });
+      
+      // Initialize tooltips for copy buttons
+      copyButtons.forEach(function(button) {
+        if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+          new bootstrap.Tooltip(button, {
+            placement: 'left'
+          });
+        }
+      });
+      
+      // Handle copy success
+      clipboard.on('success', function(e) {
+        const button = e.trigger;
+        const icon = button.children[0];
+        const originalClass = icon.className;
+        
+        // Clear selection
+        e.clearSelection();
+        
+        // Change icon to checkmark
+        icon.className = 'fas fa-check';
+        
+        // Show success tooltip
+        const successText = button.getAttribute('data-title-succeed') || 'Copied!';
+        button.setAttribute('data-bs-original-title', successText);
+        
+        if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+          const tooltip = bootstrap.Tooltip.getInstance(button);
+          if (tooltip) {
+            tooltip.show();
+          }
+        }
+        
+        // Reset after 2 seconds
+        setTimeout(function() {
+          icon.className = originalClass;
+          button.removeAttribute('data-bs-original-title');
+          
+          if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+            const tooltip = bootstrap.Tooltip.getInstance(button);
+            if (tooltip) {
+              tooltip.hide();
+            }
+          }
+        }, 2000);
+      });
+      
+      // Handle copy error
+      clipboard.on('error', function(e) {
+        console.error('Copy failed:', e);
+      });
+      
+      console.log('Copy buttons initialized successfully');
+    } else {
+      console.error('ClipboardJS not available');
+    }
+  }
+});
+</script>
