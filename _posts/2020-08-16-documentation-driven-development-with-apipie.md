@@ -73,13 +73,13 @@ categories: ['apipie', 'documentation', 'Rails', 'rails api documentation', 'Rai
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"align":"wide"} -->
-<div class="wp-block-group alignwide"><div class="wp-block-group__inner-container"><!-- wp:code -->
-<pre class="wp-block-code"><code>  api :POST, '/v0/events', "Creates an event"
+<div class="wp-block-group alignwide"><div class="wp-block-group__inner-container">```ruby
+api :POST, '/v0/events', "Creates an event"
   param_group :create_event_request_schema
   returns :create_event_response_schema, :code => 201, :desc => "An event"
   def create
-  end</code></pre>
-<!-- /wp:code -->
+  end
+```
 
 <!-- wp:paragraph -->
 <p></p>
@@ -98,11 +98,11 @@ categories: ['apipie', 'documentation', 'Rails', 'rails api documentation', 'Rai
 <p><em>app/controllers/api/v0/events_controller.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class Api::V0::EventsController &lt; ApplicationController
+```ruby
+class Api::V0::EventsController < ApplicationController
   include Request::Api::V0::EventsSchema
-  include Response::Api::V0::EventsSchema</code></pre>
-<!-- /wp:code -->
+  include Response::Api::V0::EventsSchema
+```
 
 <!-- wp:group -->
 <div class="wp-block-group"><div class="wp-block-group__inner-container"></div></div>
@@ -116,27 +116,27 @@ categories: ['apipie', 'documentation', 'Rails', 'rails api documentation', 'Rai
 <p><em>schema/request/api/v0/events_schema.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>module Request::Api::V0::EventsSchema
+```ruby
+module Request::Api::V0::EventsSchema
   def self.included(klazz)
     klazz.def_param_group :create_event_request_schema       do
-      meta :authentication => &#91;:validate_user_token]
-      formats &#91;'json', 'jsonp']
-      tags %w&#91;agent-app]
+      meta :authentication => [:validate_user_token]
+      formats ['json', 'jsonp']
+      tags %w[agent-app]
       error :code => 401, :desc => "Unauthorized"
       error :code => 400, :desc => "Bad Request"
       param :start_time, :number, :required => true, :desc => "time when the event will start. (in unix epoch)"
     end
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p><em>schema/response/api/v0/events_schema.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>module Response::Api::V0::EventsSchema
+```ruby
+module Response::Api::V0::EventsSchema
   def self.included(klazz)
     klazz.def_param_group :event_response_schema do
       param :message, String, :desc => "Response message"
@@ -147,8 +147,8 @@ end</code></pre>
       end
     end
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p><strong>STEP 2: Define a basic test which validates the API conforming to the above defined schema.</strong></p>
@@ -158,21 +158,21 @@ end</code></pre>
 <p><em>spec/controllers/api/v0/events_controller_spec.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>require "rails_helper"
+```json
+require "rails_helper"
 require 'apipie/rspec/response_validation_helper'
 
 RSpec.describe Api::V0::LeadEventsController, type: :controller, :show_in_doc => true do
   describe "Create events" do
     it "returns a successful response and conforms to the schema" do
       post :create, :params => {start_time: Time.now}
-      expect(JSON.parse(response.body)&#91;"errors"]).to be_falsey
+      expect(JSON.parse(response.body)["errors"]).to be_falsey
       expect(response).to have_http_status(:created)
       expect(response).to match_declared_responses
     end
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p>Here, <code>expect(response).to match_declared_responses</code> is  a one-liner matcher provided by APIPIE which checks whether the API response matches the schema defined for the API inside the <code>returns</code> block. This matches checks the required keys, their structure along with their validator types. This can be a good starting point for a controller test or request spec. It can be supplemented further with other required assertions.</p>

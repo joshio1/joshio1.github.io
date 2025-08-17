@@ -40,8 +40,8 @@ categories: ['hetzner', 'HTTPS', 'Kamal', 'kamal', 'LetsEncrypt', 'Rails', 'Rail
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"yaml"} -->
-<pre class="wp-block-syntaxhighlighter-code"># Name of your application. Used to uniquely configure containers.
+```yaml
+# Name of your application. Used to uniquely configure containers.
 service: rubypodcatcher
 
 # Name of the container image.
@@ -51,7 +51,7 @@ image: joshio1/rubypodcatcher
 servers:
   web:
     hosts:
-      - &lt;SERVER_IP>
+      - <SERVER_IP>
     labels:
       traefik.http.routers.rubypodcatcher.rule: Host(`rubypodcatcher.com`)
       traefik.http.routers.rubypodcatcher_secure.entrypoints: websecure
@@ -93,8 +93,8 @@ traefik:
     certificatesResolvers.letsencrypt.acme.email: "omkar.nitin.joshi@gmail.com"
     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
     certificatesResolvers.letsencrypt.acme.httpchallenge: true
-    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web</pre>
-<!-- /wp:syntaxhighlighter/code -->
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -124,11 +124,11 @@ traefik:
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">$ ssh root@&lt;SERVER_IP>
-root# mkdir -p /letsencrypt &amp;&amp; touch /letsencrypt/acme.json &amp;&amp; chmod 600 /letsencrypt/acme.json
-root# docker network create -d bridge private</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+$ ssh root@<SERVER_IP>
+root# mkdir -p /letsencrypt && touch /letsencrypt/acme.json && chmod 600 /letsencrypt/acme.json
+root# docker network create -d bridge private
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -150,12 +150,12 @@ root# docker network create -d bridge private</pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code"># config/production.rb
+```ruby
+# config/production.rb
   
 # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true</pre>
-<!-- /wp:syntaxhighlighter/code -->
+  config.force_ssl = true
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Step 4: Allow inbound HTTPS connections</h2>
@@ -215,11 +215,11 @@ root# docker network create -d bridge private</pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">kamal setup
+```bash
+kamal setup
 kamal deploy
-kamal traefik restart</pre>
-<!-- /wp:syntaxhighlighter/code -->
+kamal traefik restart
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -237,10 +237,10 @@ kamal traefik restart</pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">kamal traefik logs
-kamal app logs</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+kamal traefik logs
+kamal app logs
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->

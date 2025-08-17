@@ -20,12 +20,12 @@ categories: ['Rails', 'Testing']
 <p class="">Consider this code snippet:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code">      expect(user.accept_friend_invitation).to be_truthy
+```ruby
+expect(user.accept_friend_invitation).to be_truthy
 
       expect(user.errors).to be_blank
-      expect(user.post).to be_truthy</pre>
-<!-- /wp:syntaxhighlighter/code -->
+      expect(user.post).to be_truthy
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -49,12 +49,12 @@ categories: ['Rails', 'Testing']
 <p class="">Instead of the above code snippet, this is better:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code">      expect(user.errors).to be_blank
+```ruby
+expect(user.errors).to be_blank
 
       expect(user.accept_friend_invitation).to be_truthy
-      expect(user.post).to be_truthy</pre>
-<!-- /wp:syntaxhighlighter/code -->
+      expect(user.post).to be_truthy
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Why?</h2>

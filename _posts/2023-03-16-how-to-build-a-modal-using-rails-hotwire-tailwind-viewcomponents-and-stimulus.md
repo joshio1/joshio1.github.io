@@ -108,8 +108,8 @@ categories: ['Hotwire', 'Modal', 'Rails', 'Rails', 'Ruby', 'RubyOnRails', 'Stimu
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class WeeklyAvailabilitiesController &lt; ApplicationController
+```ruby
+class WeeklyAvailabilitiesController < ApplicationController
   before_action :authenticate_user!
 
   def show
@@ -128,11 +128,11 @@ categories: ['Hotwire', 'Modal', 'Rails', 'Rails', 'Ruby', 'RubyOnRails', 'Stimu
   private
 
   def user_params
-    params.require(:user).permit(availabilities_attributes: &#91;:id, :_destroy, :start_time, :end_time, :dow])
+    params.require(:user).permit(availabilities_attributes: [:id, :_destroy, :start_time, :end_time, :dow])
   end
 
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -186,31 +186,31 @@ end</code></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>// availability_modal_component.html.erb
+```html
+// availability_modal_component.html.erb
 
-  &lt;%= form_for current_user, method: :patch, url: weekly_availability_path(current_user), html: { id: 'availability_form', class: 'bg-white' }, data: { turbo: false } do |f| %&gt;
-    &lt;div&gt;
-      &lt;div&gt;
+  <%= form_for current_user, method: :patch, url: weekly_availability_path(current_user), html: { id: 'availability_form', class: 'bg-white' }, data: { turbo: false } do |f| %>
+    <div>
+      <div>
         // Code to view availabilities and also change availabilities
-      &lt;div&gt;
-        &lt;%= f.submit 'Save' %&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;%- end %&gt;</code></pre>
-<!-- /wp:code -->
+      <div>
+        <%= f.submit 'Save' %>
+      </div>
+    </div>
+  <%- end %>
+```
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>// availability_modal_component.rb
+```ruby
+// availability_modal_component.rb
 
-class AvailabilityModalComponent &lt; ViewComponent::Base
+class AvailabilityModalComponent < ViewComponent::Base
   attr_reader :current_user
 
   def initialize(current_user:)
     @current_user = current_user
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -248,21 +248,21 @@ end</code></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>app/views/calendars/show.html.erb
+```html
+app/views/calendars/show.html.erb
 
 // Other calendar#show view code
 
-&lt;div class="align-self-center whitespace-nowrap mr-0 ml-auto"&gt;
-  &lt;%= link_to "View/Edit availability", weekly_availability_path(viewer), data: { turbo_frame: "modal" }, class: "btn btn-outline-primary" %&gt;
-&lt;/div&gt;
+<div class="align-self-center whitespace-nowrap mr-0 ml-auto">
+  <%= link_to "View/Edit availability", weekly_availability_path(viewer), data: { turbo_frame: "modal" }, class: "btn btn-outline-primary" %>
+</div>
 
-&lt;div class="container"&gt;
-  &lt;%= turbo_frame_tag "<span style="background-color: initial; font-family: inherit; font-size: inherit; color: initial;">weekly_availabilities_frame</span>" %&gt;
-&lt;/div&gt;
+<div class="container">
+  <%= turbo_frame_tag "<span style="background-color: initial; font-family: inherit; font-size: inherit; color: initial;">weekly_availabilities_frame</span>" %>
+</div>
 
-// other calendar#show view code</code></pre>
-<!-- /wp:code -->
+// other calendar#show view code
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -274,21 +274,21 @@ end</code></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>// availability_modal_component.html.erb
+```html
+// availability_modal_component.html.erb
 
-&lt;%= turbo_frame_tag "<span style="background-color: initial; font-family: inherit; font-size: inherit; color: initial;">weekly_availabilities_frame</span>" do %&gt;
-  &lt;%= form_for current_user, method: :patch, url: weekly_availability_path(current_user), html: { id: 'availability_form', class: 'rounded-2xl bg-white h-full' }, data: { turbo: false } do |f| %&gt;
-    &lt;div&gt;
-      &lt;div&gt;
+<%= turbo_frame_tag "<span style="background-color: initial; font-family: inherit; font-size: inherit; color: initial;">weekly_availabilities_frame</span>" do %>
+  <%= form_for current_user, method: :patch, url: weekly_availability_path(current_user), html: { id: 'availability_form', class: 'rounded-2xl bg-white h-full' }, data: { turbo: false } do |f| %>
+    <div>
+      <div>
         // Code to view availabilities and also change availabilities
-      &lt;div&gt;
-        &lt;%= f.submit 'Save' %&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;%- end %&gt;
-&lt;%- end %&gt;</code></pre>
-<!-- /wp:code -->
+      <div>
+        <%= f.submit 'Save' %>
+      </div>
+    </div>
+  <%- end %>
+<%- end %>
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -314,28 +314,28 @@ end</code></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;html&gt;
-&lt;head&gt;
-  &lt;%= stylesheet_pack_tag 'application' %&gt;
-  &lt;%= stylesheet_link_tag 'fonts', media: 'all', 'data-turbo-track': 'reload' %&gt;
-  &lt;%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %&gt;
-  &lt;%= favicon_link_tag %&gt;
-  &lt;%= csrf_meta_tags %&gt;
-&lt;/head&gt;
+```html
+<html>
+<head>
+  <%= stylesheet_pack_tag 'application' %>
+  <%= stylesheet_link_tag 'fonts', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+  <%= favicon_link_tag %>
+  <%= csrf_meta_tags %>
+</head>
 
-&lt;body&gt;
-&lt;div class="flex"&gt;
-  &lt;main class="bg-white"&gt;
-    &lt;%= yield %&gt;
-    &lt;div class="container"&gt;
-      &lt;%= turbo_frame_tag "weekly_availabilities_frame" %&gt;
-    &lt;/div&gt;
-  &lt;/main&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<!-- /wp:code -->
+<body>
+<div class="flex">
+  <main class="bg-white">
+    <%= yield %>
+    <div class="container">
+      <%= turbo_frame_tag "weekly_availabilities_frame" %>
+    </div>
+  </main>
+</div>
+</body>
+</html>
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -371,11 +371,11 @@ end</code></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>import { Controller } from "@hotwired/stimulus"
+```json
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = &#91;"dialogPopup"]
+    static targets = ["dialogPopup"]
 
     open(event) {
         event.preventDefault();
@@ -388,8 +388,8 @@ export default class extends Controller {
 
         this.dialogPopupTarget.close();
     }
-}</code></pre>
-<!-- /wp:code -->
+}
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->
@@ -409,39 +409,39 @@ export default class extends Controller {
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;html&gt;
-&lt;head&gt;
-  &lt;%= stylesheet_pack_tag 'application' %&gt;
-  &lt;%= stylesheet_link_tag 'fonts', media: 'all', 'data-turbo-track': 'reload' %&gt;
-  &lt;%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %&gt;
-  &lt;%= favicon_link_tag %&gt;
-  &lt;%= csrf_meta_tags %&gt;
-&lt;/head&gt;
+```html
+<html>
+<head>
+  <%= stylesheet_pack_tag 'application' %>
+  <%= stylesheet_link_tag 'fonts', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+  <%= favicon_link_tag %>
+  <%= csrf_meta_tags %>
+</head>
 
-&lt;body&gt;
-&lt;div class="flex"&gt;
-  &lt;main class="bg-white"&gt;
-    &lt;%= yield %&gt;
-          &lt;div
+<body>
+<div class="flex">
+  <main class="bg-white">
+    <%= yield %>
+          <div
             data-controller="modal"
-            data-action="turbo:frame-load-&gt;modal#open turbo:submit-end-&gt;modal#close"
+            data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
             data-modal-target="container"
-          &gt;
-            &lt;dialog data-modal-target="dialogPopup"&gt;
-              &lt;div&gt;
+          >
+            <dialog data-modal-target="dialogPopup">
+              <div>
                 // Tailwind divs for showing a modal
-                &lt;div&gt;
-                    &lt;%= turbo_frame_tag "weekly_availabilities_frame" %&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/dialog&gt;
-          &lt;/div&gt;
-  &lt;/main&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<!-- /wp:code -->
+                <div>
+                    <%= turbo_frame_tag "weekly_availabilities_frame" %>
+                </div>
+              </div>
+            </dialog>
+          </div>
+  </main>
+</div>
+</body>
+</html>
+```
 
 <!-- wp:list -->
 <ul><!-- wp:list-item -->

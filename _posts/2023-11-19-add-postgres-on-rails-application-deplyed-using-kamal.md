@@ -26,14 +26,14 @@ categories: ['hetzner', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Ra
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"yaml"} -->
-<pre class="wp-block-syntaxhighlighter-code"># config/deploy.yml file
+```yaml
+# config/deploy.yml file
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: &lt;ipv4_address_of_your_server>
+    DB_HOST: <ipv4_address_of_your_server>
     RAILS_SERVE_STATIC_FILES: true
     RAILS_LOG_TO_STDOUT: true
   secret:
@@ -43,7 +43,7 @@ env:
 accessories:  
   db:
     image: postgres:15
-    host: &lt;ipv4_address_of_your_server>
+    host: <ipv4_address_of_your_server>
     port: 5432
     env:
       clear:
@@ -52,8 +52,8 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     directories:
-      - data:/var/lib/postgresql/data</pre>
-<!-- /wp:syntaxhighlighter/code -->
+      - data:/var/lib/postgresql/data
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Step 2: Add configuration in <code>.env</code> file</h2>
@@ -65,13 +65,13 @@ accessories:
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">//.env file
+```bash
+//.env file
 
-KAMAL_REGISTRY_PASSWORD=&lt;docker_password>
-RAILS_MASTER_KEY=&lt;master_key_of_production_environment>
-POSTGRES_PASSWORD=&lt;password_of_database></pre>
-<!-- /wp:syntaxhighlighter/code -->
+KAMAL_REGISTRY_PASSWORD=<docker_password>
+RAILS_MASTER_KEY=<master_key_of_production_environment>
+POSTGRES_PASSWORD=<password_of_database>
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->

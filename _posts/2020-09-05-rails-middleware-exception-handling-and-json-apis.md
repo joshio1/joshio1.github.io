@@ -8,12 +8,12 @@ categories: ['Exception Handling', 'Rails JSON API', 'Uncategorized']
 <p>A Ruby on Rails web app is nothing but <a href="https://guides.rubyonrails.org/rails_on_rack.html">several Rack apps stacked on top of each other</a>. When a request is made to a Ruby on Rails web server, the request is passed along several Rack apps before it hits our controller code. The list of the Rails middleware that a request goes through can be figured by this command:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>rails middleware</code></pre>
-<!-- /wp:code -->
+```ruby
+rails middleware
+```
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>use Rack::Sendfile
+```ruby
+use Rack::Sendfile
 use ActionDispatch::Static
 use ActionDispatch::Executor
 use ActiveSupport::Cache::Strategy::LocalCache::Middleware
@@ -37,8 +37,8 @@ use Rack::Head
 use Rack::ConditionalGet
 use Rack::ETag
 use Rack::TempfileReaper
-run MyApp::Application.routes</code></pre>
-<!-- /wp:code -->
+run MyApp::Application.routes
+```
 
 <!-- wp:paragraph -->
 <p>Above you can see the list of middleware a request goes through before it reaches the <code>MyApp::Application.routes</code> application. This application looks at the <code>config/routes.rb</code> file to determine which controller method to call for this request. When the response is sent back from the controller method, these same middleware are invoked in the reverse order and popped off the stack one by one.</p>
@@ -48,10 +48,10 @@ run MyApp::Application.routes</code></pre>
 <p>Now, as far as exception handling is concerned, these following middleware are important:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>use ActionDispatch::ShowExceptions
-use ActionDispatch::DebugExceptions</code></pre>
-<!-- /wp:code -->
+```shell
+use ActionDispatch::ShowExceptions
+use ActionDispatch::DebugExceptions
+```
 
 <!-- wp:paragraph -->
 <p>Let's look at what these are about:</p>

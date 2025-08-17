@@ -12,12 +12,12 @@ categories: ['Kamal', 'kamal', 'Rails', 'Rails', 'Redis', 'Ruby', 'ruby on rails
 <h2 class="wp-block-heading">Step 1: Add Redis to your Gemfile</h2>
 <!-- /wp:heading -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code"># Gemfile
+```bash
+# Gemfile
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"</pre>
-<!-- /wp:syntaxhighlighter/code -->
+gem "redis", "~> 4.0"
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Step 2: Add Sidekiq (Skip if you already have Sidekiq jobs)</h2>
@@ -31,16 +31,16 @@ gem "redis", "~> 4.0"</pre>
 <p class="">We will then create a dummy job by doing:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">rails generate sidekiq:job dummy</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+rails generate sidekiq:job dummy
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Step 3: Add configuration in deploy.yml</h2>
 <!-- /wp:heading -->
 
-<!-- wp:syntaxhighlighter/code {"language":"yaml"} -->
-<pre class="wp-block-syntaxhighlighter-code">#config/deploy.yml
+```yaml
+#config/deploy.yml
 
 # Name of your application. Used to uniquely configure containers.
 service: rubypodcatcher
@@ -52,7 +52,7 @@ image: joshio1/rubypodcatcher
 servers:
   web:
     hosts:
-      - &lt;SERVER_IP>
+      - <SERVER_IP>
     options:
       network: "private"
 
@@ -60,7 +60,7 @@ servers:
   
 job:
     hosts:
-      - &lt;SERVER_IP>
+      - <SERVER_IP>
     cmd: bundle exec sidekiq -q default -q mailers
     options:
       network: "private"
@@ -68,7 +68,7 @@ job:
 env:
   clear:
     HOSTNAME: rubypodcatcher.com
-    DB_HOST: &lt;SERVER_IP>
+    DB_HOST: <SERVER_IP>
     RAILS_SERVE_STATIC_FILES: true
     RAILS_LOG_TO_STDOUT: true
     REDIS_URL: "redis://rubypodcatcher-redis:6379/0"
@@ -80,12 +80,12 @@ env:
 accessories:
   redis:
     image: redis:latest
-    host: &lt;SERVER_IP>
+    host: <SERVER_IP>
     directories:
       - data:/data
     options:
-      network: "private"</pre>
-<!-- /wp:syntaxhighlighter/code -->
+      network: "private"
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -93,9 +93,9 @@ accessories:
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">docker network create -d bridge private</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+docker network create -d bridge private
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -111,10 +111,10 @@ accessories:
 <p class="">Note that we have added Redis as an accessory. In order to deploy redis, we will use this command:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">kamal env push
-kamal accessory boot redis</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+kamal env push
+kamal accessory boot redis
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Step 5: Deploy</h2>
@@ -124,9 +124,9 @@ kamal accessory boot redis</pre>
 <p class="">Next step is to deploy on our remote server. We will do:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">kamal deploy</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+kamal deploy
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">How to check whether it's working?</h2>
@@ -138,13 +138,13 @@ kamal accessory boot redis</pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">irb(main):008:0> redis = Redis.new
-=> #&lt;Redis client v4.8.1 for redis://rubypodcatcher-redis:6379/0>
+```bash
+irb(main):008:0> redis = Redis.new
+=> #<Redis client v4.8.1 for redis://rubypodcatcher-redis:6379/0>
 irb(main):009:0> 
 irb(main):010:0> redis.set("sample_key", "sample_value")
-=> "OK"</pre>
-<!-- /wp:syntaxhighlighter/code -->
+=> "OK"
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -152,11 +152,11 @@ irb(main):010:0> redis.set("sample_key", "sample_value")
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">irb(main):005:0> DummyJob.perform_async
+```bash
+irb(main):005:0> DummyJob.perform_async
 2024-01-18T15:39:15.194Z pid=7 tid=2jb INFO: Sidekiq 7.2.0 connecting to Redis with options {:size=>10, :pool_name=>"internal", :url=>"redis://rubypodcatcher-redis:6379/0"}
-=> "2ab8740502724b5d107182cd"</pre>
-<!-- /wp:syntaxhighlighter/code -->
+=> "2ab8740502724b5d107182cd"
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Conclusion:</h2>

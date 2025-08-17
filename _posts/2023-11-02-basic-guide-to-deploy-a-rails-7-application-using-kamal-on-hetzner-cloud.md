@@ -42,9 +42,9 @@ categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rai
 <p class=""></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">rails new kamal_demo -T -m https://raw.githubusercontent.com/joshio1/rails_application_template/main/application_template.rb</pre>
-<!-- /wp:syntaxhighlighter/code -->
+```bash
+rails new kamal_demo -T -m https://raw.githubusercontent.com/joshio1/rails_application_template/main/application_template.rb
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -224,19 +224,19 @@ RAILS_MASTER_KEY=&lt;our_rails_production_master_key></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"yaml"} -->
-<pre class="wp-block-syntaxhighlighter-code">service: kamal_demo
+```yaml
+service: kamal_demo
 image: joshio1/kamal_demo
 servers:
-  - &lt;ipv4_address_of_Hetzner_server>
+  - <ipv4_address_of_Hetzner_server>
 registry:
   username: joshio1
   password:
     - KAMAL_REGISTRY_PASSWORD
 env:
   secret:
-    - RAILS_MASTER_KEY</pre>
-<!-- /wp:syntaxhighlighter/code -->
+    - RAILS_MASTER_KEY
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->

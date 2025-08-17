@@ -24,16 +24,16 @@ categories: ['Rails', 'Rails', 'Rails Generators', 'Rails JSON API Documentation
 <p>This is a snippet from my API generator which shows the parameters which this generator accepts:<br><br><em>lib/generators/api/api_generator.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code># This class is used to define the generator which will be used to create request / response schema files.
-class ApiGenerator &lt; Rails::Generators::NamedBase
+```ruby
+# This class is used to define the generator which will be used to create request / response schema files.
+class ApiGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('templates', __dir__)
-  argument :actions, type: :array, default: &#91;], banner: "action1 action2"
+  argument :actions, type: :array, default: [], banner: "action1 action2"
   class_option :controller_schema_files, type: :boolean, default: true
   class_option :model_schema_file, type: :boolean, default: true
   class_option :controller_file, type: :boolean, default: true
-  class_option :include_statement_in_controller, type: :boolean, default: false</code></pre>
-<!-- /wp:code -->
+  class_option :include_statement_in_controller, type: :boolean, default: false
+```
 
 <!-- wp:paragraph -->
 <p>Since the <code>ApiGenerator</code> extends from <code>Rails::Generators::NamedBase</code>, it takes a <code>name</code> as a mandatory parameter. This name will be the name of the controller in which this API will be placed. The name parameter can also contain namespaces like <code>api::v0::vehicles</code> or <code>api/v0/vehicles</code>. This parameter value will be the same as that the Rails default controller generator accepts.<br>Now, let's go over all the parameters one by one and its meaning:</p>
@@ -51,21 +51,21 @@ class ApiGenerator &lt; Rails::Generators::NamedBase
 <p><code><strong>actions</strong></code>: Actions is a list of space separated words which are nothing but the methods in our controller file. For eg. possible values can be <code>index</code>, <code>show</code>, <code>edit</code>, <code>create</code> etc. This will do these following things:<br>1. Create methods for actions inside the controller file.<br>2. Add API request response structure for actions inside the schema files.<br>3. A spec or a test is created for these actions.<br>For example: Here is a sample output after running <code>rails g api api::v0::documents index --no-controller-file --no-schema-files</code><br><br><em>schema/request/api/v0/documents_schema.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>module Request::Api::V0::DocumentsSchema
+```ruby
+module Request::Api::V0::DocumentsSchema
   def self.included(klazz)
 
   klazz.def_param_group :index_documents_request_schema do
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p><em>schema/response/api/v0/documents_schema.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>module Response::Api::V0::DocumentsSchema
+```ruby
+module Response::Api::V0::DocumentsSchema
   def self.included(klazz)
   klazz.class_eval do
     include Response::DocumentSchema
@@ -78,15 +78,15 @@ end</code></pre>
       param_group :document_response_schema
     end
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p><em>app/controllers/api/v0/documents_controller.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class Api::V0::DocumentsController &lt; ApplicationController
+```ruby
+class Api::V0::DocumentsController < ApplicationController
   include Request::Api::V0::DocumentsSchema
   include Response::Api::V0::DocumentsSchema
 
@@ -97,15 +97,15 @@ end</code></pre>
   returns :index_documents_response_schema, :code => 200, :desc => "Successful response"
   def index
     render_response(200, {response: {}})
-  end</code></pre>
-<!-- /wp:code -->
+  end
+```
 
 <!-- wp:paragraph -->
 <p><em>spec/controllers/api/v0/documents_controller_spec.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>require 'rails_helper'
+```shell
+require 'rails_helper'
 require 'apipie/rspec/response_validation_helper'
 
 RSpec.describe Api::V0::DocumentsController, type: :controller do
@@ -116,8 +116,8 @@ RSpec.describe Api::V0::DocumentsController, type: :controller do
       expect(response).to have_http_status(:success)
       expect(response).to match_declared_responses
     end
-  end</code></pre>
-<!-- /wp:code -->
+  end
+```
 
 <!-- wp:paragraph -->
 <p><br>This is how we can define the API request response schema for the action <code>index</code> and link it back to the controller method <code>index</code>.  <br>Note that the flags <code>--no-controller-file</code> and <code>--no-schema-files</code> are just so that the controller file and schema files are not <strong><em>created</em></strong>. The generator will assume that the files already exist and <strong><em>modify</em></strong> the files to add the corresponding actions.</p>
@@ -135,8 +135,8 @@ RSpec.describe Api::V0::DocumentsController, type: :controller do
 <p><em>schema/response/document_schema.rb:</em></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>module Response
+```ruby
+module Response
   module DocumentSchema
     def self.included(klazz)
 
@@ -151,8 +151,8 @@ RSpec.describe Api::V0::DocumentsController, type: :controller do
       end
     end
   end
-end</code></pre>
-<!-- /wp:code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p>This is a set of all the columns defined in the documents table. You can create a subset out of this schema according to your API requirements. This provides a handy way instead of creating a schema DSL from the table columns.</p>

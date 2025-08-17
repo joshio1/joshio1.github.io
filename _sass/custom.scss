@@ -5,10 +5,10 @@
 /* Improved spacing for post content */
 .post-content {
   max-width: none;
-  
+
   .post-header {
     margin-bottom: 3rem;
-    
+
     .post-title {
       font-size: 2.5rem;
       font-weight: 700;
@@ -16,50 +16,50 @@
       margin-bottom: 1rem;
       color: var(--heading-color);
     }
-    
+
     .post-desc {
       font-size: 1.1rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
     }
-    
+
     .post-meta {
       font-size: 0.9rem;
       padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border-color);
-      
+
       .post-date, .post-read-time {
         color: var(--text-muted);
       }
     }
   }
-  
+
   .content {
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 3rem;
-    
+
     /* Better paragraph spacing */
     p {
       margin-bottom: 1.5rem;
     }
-    
+
     /* Better heading spacing */
     h1, h2, h3, h4, h5, h6 {
       margin-top: 2.5rem;
       margin-bottom: 1rem;
       font-weight: 600;
     }
-    
+
     h1 { font-size: 2rem; }
     h2 { font-size: 1.75rem; }
     h3 { font-size: 1.5rem; }
     h4 { font-size: 1.25rem; }
-    
+
     /* Better list spacing */
     ul, ol {
       margin-bottom: 1.5rem;
-      
+
       li {
         margin-bottom: 0.5rem;
       }
@@ -76,7 +76,7 @@
   border: 1px solid var(--border-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  
+
   pre {
     margin: 0;
     padding: 1.5rem;
@@ -86,16 +86,16 @@
     background: var(--code-bg);
     overflow-x: auto;
   }
-  
+
   /* Line numbers styling */
   table {
     margin: 0;
     width: 100%;
-    
+
     td {
       padding: 0;
       border: none;
-      
+
       &:first-child {
         width: 3rem;
         text-align: right;
@@ -104,13 +104,13 @@
         background: var(--code-line-bg, rgba(0, 0, 0, 0.05));
         border-right: 1px solid var(--border-color);
         user-select: none;
-        
+
         .lineno {
           color: var(--text-muted);
           font-size: 0.8rem;
         }
       }
-      
+
       &:last-child {
         padding: 1.5rem;
         padding-left: 1rem;
@@ -132,10 +132,38 @@ code {
 /* Code blocks without line numbers */
 .highlighter-rouge {
   margin: 1.5rem 0;
-  
+
   .highlight {
     margin: 0;
   }
+}
+
+/* ===== ENHANCED CHIRPY CODE BLOCK STYLING ===== */
+
+/* Additional enhancements for Chirpy's native code blocks */
+.highlight {
+  /* Add copy button styling when available */
+  position: relative;
+
+  /* Enhance the existing styling */
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Improve code block language label styling */
+.highlight .language-label {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--text-muted);
+  color: var(--sidebar-bg);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ===== HOME PAGE IMPROVEMENTS ===== */
@@ -146,28 +174,28 @@ code {
   border: 1px solid var(--card-border-color);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
-  
+
   .card-body {
     padding: 2rem;
-    
+
     .card-title {
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1rem;
       color: var(--heading-color);
     }
-    
+
     .card-text {
       font-size: 1rem;
       line-height: 1.6;
       color: var(--text-color);
     }
-    
+
     .post-meta {
       font-size: 0.9rem;
       color: var(--text-muted);
@@ -184,40 +212,42 @@ code {
         font-size: 2rem;
       }
     }
-    
+
     .content {
       font-size: 1rem;
-      
+
       h1 { font-size: 1.75rem; }
       h2 { font-size: 1.5rem; }
       h3 { font-size: 1.25rem; }
       h4 { font-size: 1.1rem; }
     }
   }
-  
+
   .highlight {
     margin: 1.5rem -1rem;
     border-radius: 0;
     border-left: none;
     border-right: none;
-    
+
     pre {
       padding: 1rem;
       font-size: 0.8rem;
     }
-    
+
     table td {
       &:first-child {
         width: 2.5rem;
         padding-right: 0.5rem;
         padding-left: 0.5rem;
       }
-      
+
       &:last-child {
         padding: 1rem 0.5rem;
       }
     }
   }
+
+
 }
 
 /* ===== CATEGORY AND TAG STYLING ===== */
@@ -232,7 +262,7 @@ code {
   font-size: 0.8rem;
   text-decoration: none;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: var(--tag-hover-bg, rgba(52, 152, 219, 0.2));
     color: var(--tag-hover-color, #2980b9);
@@ -251,7 +281,7 @@ code {
     width: 100%;
     text-align: center;
   }
-  
+
   body:not(.home-layout) #main-wrapper .container {
     padding-left: 1rem;
   }

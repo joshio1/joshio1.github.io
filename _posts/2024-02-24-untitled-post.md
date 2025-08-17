@@ -16,8 +16,8 @@ categories: ['Uncategorized']
 <p class=""></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>  let(:mailer) { double(:tutor_mailer) }
+```json
+let(:mailer) { double(:tutor_mailer) }
 
   before do
     allow(TutorMailer).to receive(:disconnect_connection_reminder_email).and_return(mailer)
@@ -25,17 +25,17 @@ categories: ['Uncategorized']
   end
 
  expect(TutorMailer).to have_received(:disconnect_connection_reminder_email)
-    expect(mailer).to have_received(:deliver_now)</code></pre>
-<!-- /wp:code -->
+    expect(mailer).to have_received(:deliver_now)
+```
 
 <!-- wp:paragraph -->
 <p class="">Issue with above is that Rubocop complains because <code>instance_double</code> are preferred over <code>double</code></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>   allow(TutorMailer).to receive_message_chain(:send_approval_email, :deliver_now)
-expect(TutorMailer).to have_received(:send_approval_email).with(user)</code></pre>
-<!-- /wp:code -->
+```shell
+allow(TutorMailer).to receive_message_chain(:send_approval_email, :deliver_now)
+expect(TutorMailer).to have_received(:send_approval_email).with(user)
+```
 
 <!-- wp:paragraph -->
 <p class=""></p>
@@ -45,8 +45,8 @@ expect(TutorMailer).to have_received(:send_approval_email).with(user)</code></pr
 <p class="">if we use the <code>with</code> syntax while calling mailers, we can do this:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>    context 'when user is a partner owner' do
+```json
+context 'when user is a partner owner' do
       let(:user) { create(:user, user_type: 'general', admin: true) }
       let(:partner) { create(:partner, admin: user) }
 
@@ -59,8 +59,8 @@ expect(TutorMailer).to have_received(:send_approval_email).with(user)</code></pr
 
         expect(UserMailer).to have_received(:with).with(user: partner.admin)
       end
-    end</code></pre>
-<!-- /wp:code -->
+    end
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -68,8 +68,8 @@ expect(TutorMailer).to have_received(:send_approval_email).with(user)</code></pr
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>      Sidekiq::Testing.inline! do
+```json
+Sidekiq::Testing.inline! do
         expect do
           post :create, params: partner_params
         end.to change { ActionMailer::Base.deliveries.count }.by(1)
@@ -79,9 +79,9 @@ expect(TutorMailer).to have_received(:send_approval_email).with(user)</code></pr
         expect(email.body.encoded).to include('Login')
         expect(email.body.encoded).to include("Congratulations! You have been accepted as a Partner with Learn to Be! We've created a Partner Admin Owner account for you at learntobe.org")
         expect(email.body.encoded).to include('emily.darcy@learntobe.org')
-        expect(email.to).to eq(&#91;user.email])
-      end</code></pre>
-<!-- /wp:code -->
+        expect(email.to).to eq([user.email])
+      end
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->

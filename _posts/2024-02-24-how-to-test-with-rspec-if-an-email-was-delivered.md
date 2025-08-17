@@ -20,8 +20,8 @@ categories: ['Rails', 'Rails', 'ruby on rails', 'RubyOnRails']
 <p class=""></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code">RSpec.describe UserWelcomeWorker, type: :worker do
+```ruby
+RSpec.describe UserWelcomeWorker, type: :worker do
   let(:message_delivery) { instance_double(ActionMailer::MessageDelivery)}
 
   before do
@@ -34,8 +34,8 @@ categories: ['Rails', 'Rails', 'ruby on rails', 'RubyOnRails']
 
      expect(UserMailer).to have_received(:send_welcome_email).with(user).once
   end
-end</pre>
-<!-- /wp:syntaxhighlighter/code -->
+end
+```
 
 <!-- wp:paragraph -->
 <p class=""></p>
@@ -45,8 +45,8 @@ end</pre>
 <h2 class="wp-block-heading">A Better Way:  Writing Custom Matcher</h2>
 <!-- /wp:heading -->
 
-<!-- wp:syntaxhighlighter/code {"language":"ruby"} -->
-<pre class="wp-block-syntaxhighlighter-code">#spec/support/matchers/send_email_with.rb
+```ruby
+#spec/support/matchers/send_email_with.rb
 
 RSpec::Matchers.define :send_email_with do |mailer, mailer_method, args = anything|
   match do |block|
@@ -76,8 +76,8 @@ it 'sends welcome email to users' do
   expect {
     described_class.new.perform(user)
   }.to send_email_with(UserMailer, :send_welcome_email, user)
-end</pre>
-<!-- /wp:syntaxhighlighter/code -->
+end
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">What this does not cover?</h2>

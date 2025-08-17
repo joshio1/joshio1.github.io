@@ -12,8 +12,8 @@ categories: ['Kamal', 'Rails']
 <p class="">This is a typical stack trace we get when this happens:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code">18:12:06 web.1    | Exiting
+```bash
+18:12:06 web.1    | Exiting
 18:12:06 web.1    | /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/activesupport-7.1.1/lib/active_support/messages/codec.rb:57:in `catch_and_raise': ActiveSupport::MessageEncryptor::InvalidMessage
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/activesupport-7.1.1/lib/active_support/message_encryptor.rb:242:in `decrypt_and_verify'
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/activesupport-7.1.1/lib/active_support/encrypted_file.rb:109:in `decrypt'
@@ -24,10 +24,10 @@ categories: ['Kamal', 'Rails']
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/activesupport-7.1.1/lib/active_support/core_ext/module/delegation.rb:332:in `method_missing'
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/devise-4.9.2/lib/devise/secret_key_finder.rb:24:in `key_exists?'
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/devise-4.9.2/lib/devise/secret_key_finder.rb:10:in `find'
-18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/devise-4.9.2/lib/devise/rails.rb:37:in `block in &lt;class:Engine>'
+18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/devise-4.9.2/lib/devise/rails.rb:37:in `block in <class:Engine>'
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/railties-7.1.1/lib/rails/initializable.rb:32:in `instance_exec'
-18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/railties-7.1.1/lib/rails/initializable.rb:32:in `run'</pre>
-<!-- /wp:syntaxhighlighter/code -->
+18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/railties-7.1.1/lib/rails/initializable.rb:32:in `run'
+```
 
 <!-- wp:paragraph -->
 <p class=""></p>
@@ -47,11 +47,11 @@ categories: ['Kamal', 'Rails']
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code"># .env.local
+```bash
+# .env.local
 
-RAILS_MASTER_KEY=&lt;development_master_key></pre>
-<!-- /wp:syntaxhighlighter/code -->
+RAILS_MASTER_KEY=<development_master_key>
+```
 
 <!-- wp:list -->
 <ul class=""><!-- wp:list-item -->
@@ -59,11 +59,11 @@ RAILS_MASTER_KEY=&lt;development_master_key></pre>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
-<pre class="wp-block-syntaxhighlighter-code"># Procfile.dev
+```bash
+# Procfile.dev
 
-exec foreman start -e .env.local -f Procfile.dev "$@"</pre>
-<!-- /wp:syntaxhighlighter/code -->
+exec foreman start -e .env.local -f Procfile.dev "$@"
+```
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Why does this work?</h2>
