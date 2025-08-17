@@ -1,42 +1,41 @@
 # Custom asset configuration to fix htmlproofer issues
-# Use CDN for fonts and FontAwesome to avoid missing file errors
+# Use CDN for all assets to avoid missing file errors in GitHub Pages
 
-# Web Fonts - Use Google Fonts CDN instead of local
+# Web Fonts - Use Google Fonts CDN
 webfonts: https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap
 
-# Libraries
+# Libraries - All using CDN to avoid missing file issues
 
 toc:
-  css: /assets/lib/tocbot/tocbot.min.css
-  js: /assets/lib/tocbot/tocbot.min.js
+  css: https://cdn.jsdelivr.net/npm/tocbot@4.32.2/dist/tocbot.min.css
+  js: https://cdn.jsdelivr.net/npm/tocbot@4.32.2/dist/tocbot.min.js
 
-# FontAwesome - Use CDN instead of local to avoid missing file errors
 fontawesome:
   css: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.1/css/all.min.css
 
 search:
-  js: /assets/lib/simple-jekyll-search/simple-jekyll-search.min.js
+  js: https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js
 
 mermaid:
-  js: /assets/lib/mermaid/mermaid.min.js
+  js: https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js
 
 dayjs:
   js:
-    common: /assets/lib/dayjs/dayjs.min.js
-    locale: /assets/lib/dayjs/locale/en.js
-    relativeTime: /assets/lib/dayjs/plugin/relativeTime.js
-    localizedFormat: /assets/lib/dayjs/plugin/localizedFormat.js
+    common: https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js
+    locale: https://cdn.jsdelivr.net/npm/dayjs@1.11.13/locale/en.js
+    relativeTime: https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/relativeTime.js
+    localizedFormat: https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/localizedFormat.js
 
 glightbox:
-  css: /assets/lib/glightbox/glightbox.min.css
-  js: /assets/lib/glightbox/glightbox.min.js
+  css: https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css
+  js: https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js
 
 lazy-polyfill:
-  css: /assets/lib/loading-attribute-polyfill/loading-attribute-polyfill.min.css
-  js: /assets/lib/loading-attribute-polyfill/loading-attribute-polyfill.umd.min.js
+  css: https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css
+  js: https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js
 
 clipboard:
-  js: /assets/lib/clipboard/clipboard.min.js
+  js: https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js
 
 mathjax:
-  js: /assets/lib/mathjax/tex-chtml.js
+  js: https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js
