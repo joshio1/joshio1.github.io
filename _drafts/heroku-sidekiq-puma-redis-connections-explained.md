@@ -1,6 +1,5 @@
 ---
 title: "Heroku, Sidekiq, Puma and Redis Connections Explained"
-date: 2023-10-26 05:52:39
 categories: ['Uncategorized']
 ---
 

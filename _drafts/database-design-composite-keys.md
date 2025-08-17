@@ -1,6 +1,5 @@
 ---
 title: "Database Design - Composite Keys are not that bad."
-date: 2020-08-06 19:04:01
 categories: ['Uncategorized']
 ---
 

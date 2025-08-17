@@ -1,6 +1,5 @@
 ---
-title: "How to test if mailer in enqueued"
-date: 2024-02-24 11:39:31
+title: "How to test if mailer is enqueued"
 categories: ['Uncategorized']
 ---
 

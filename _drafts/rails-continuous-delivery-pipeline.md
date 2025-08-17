@@ -1,6 +1,5 @@
 ---
 title: "Rails Continuous Delivery Pipeline"
-date: 2020-08-30 12:02:28
 categories: ['Uncategorized']
 ---
 
