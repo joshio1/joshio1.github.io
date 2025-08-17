@@ -4,13 +4,9 @@ date: 2024-02-18 13:05:36
 categories: ['Kamal', 'Rails']
 ---
 
-<!-- wp:paragraph -->
-<p class="">When <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">deploying a Rails application using Kamal</a>, we set <code>RAILS_MASTER_KEY</code> in our <code>.env</code> file. However, this <code>RAILS_MASTER_KEY</code> is for our production environment. When we try to run the same application on our development environment, we get <code>ActiveSupport::MessageEncryptor::InvalidMessage</code> error because Rails is not able to decrypt the development credentials file. This article will show you how to fix this Master Key Encryption error when using <a href="https://github.com/ddollar/foreman">foreman</a> to start the development environment. </p>
-<!-- /wp:paragraph -->
+When <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">deploying a Rails application using Kamal</a>, we set `RAILS_MASTER_KEY` in our `.env` file. However, this `RAILS_MASTER_KEY` is for our production environment. When we try to run the same application on our development environment, we get `ActiveSupport::MessageEncryptor::InvalidMessage` error because Rails is not able to decrypt the development credentials file. This article will show you how to fix this Master Key Encryption error when using <a href="https://github.com/ddollar/foreman">foreman</a> to start the development environment.
 
-<!-- wp:paragraph -->
-<p class="">This is a typical stack trace we get when this happens:</p>
-<!-- /wp:paragraph -->
+This is a typical stack trace we get when this happens:
 
 ```bash
 18:12:06 web.1    | Exiting
@@ -29,23 +25,11 @@ categories: ['Kamal', 'Rails']
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/railties-7.1.1/lib/rails/initializable.rb:32:in `run'
 ```
 
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
+In this case, we have typically run the Rails application in our development environment using the `bin/dev` command and we use `<a href="https://github.com/ddollar/foreman">foreman</a>` in our `Procfile.dev`.
 
-<!-- wp:paragraph -->
-<p class="">In this case, we have typically run the Rails application in our development environment using the <code>bin/dev</code> command and we use <code><a href="https://github.com/ddollar/foreman">foreman</a></code> in our <code>Procfile.dev</code>.</p>
-<!-- /wp:paragraph -->
+## The Fix:
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">The Fix:</h2>
-<!-- /wp:heading -->
-
-<!-- wp:list -->
-<ul class=""><!-- wp:list-item -->
-<li class="">Create a separate environment variable file for our local environment:</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
+- Create a separate environment variable file for our local environment:
 
 ```bash
 # .env.local
@@ -53,11 +37,7 @@ categories: ['Kamal', 'Rails']
 RAILS_MASTER_KEY=<development_master_key>
 ```
 
-<!-- wp:list -->
-<ul class=""><!-- wp:list-item -->
-<li class="">Explicitly specify this environment variable when foreman starts in Procfile.dev</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
+- Explicitly specify this environment variable when foreman starts in Procfile.dev
 
 ```bash
 # Procfile.dev
@@ -65,24 +45,10 @@ RAILS_MASTER_KEY=<development_master_key>
 exec foreman start -e .env.local -f Procfile.dev "$@"
 ```
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Why does this work?</h2>
-<!-- /wp:heading -->
+## Why does this work?
 
-<!-- wp:list -->
-<ul class=""><!-- wp:list-item -->
-<li class="">Earlier our Procfile.dev, simply started foreman using this command: <code>exec foreman start -f Procfile.dev "<em>$@</em>"</code>. This command automatically picks up the <code>.env</code> file which is present in the root directory.</li>
-<!-- /wp:list-item -->
+- Earlier our Procfile.dev, simply started foreman using this command: `exec foreman start -f Procfile.dev "*$@*"`. This command automatically picks up the `.env` file which is present in the root directory.
+- In our case, this `.env` file has configuration for the production environment which are required for Kamal.
+- In our fix, we explicitly point foreman to a different "local" environment variable file which gets rid of this error.
 
-<!-- wp:list-item -->
-<li class="">In our case, this <code>.env</code> file has configuration for the production environment which are required for Kamal.</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li class="">In our fix, we explicitly point foreman to a different "local" environment variable file which gets rid of this error.</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p class="">Check out <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">my Rails Kamal Series</a> for step by step guide to deploy Rails application using Kamal. </p>
-<!-- /wp:paragraph -->
+Check out <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">my Rails Kamal Series</a> for step by step guide to deploy Rails application using Kamal.

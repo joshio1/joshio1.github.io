@@ -4,18 +4,6 @@ date: 2024-02-24 11:39:31
 categories: ['Uncategorized']
 ---
 
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
-
 ```json
 let(:mailer) { double(:tutor_mailer) }
 
@@ -28,22 +16,14 @@ let(:mailer) { double(:tutor_mailer) }
     expect(mailer).to have_received(:deliver_now)
 ```
 
-<!-- wp:paragraph -->
-<p class="">Issue with above is that Rubocop complains because <code>instance_double</code> are preferred over <code>double</code></p>
-<!-- /wp:paragraph -->
+Issue with above is that Rubocop complains because `instance_double` are preferred over `double`
 
 ```shell
 allow(TutorMailer).to receive_message_chain(:send_approval_email, :deliver_now)
 expect(TutorMailer).to have_received(:send_approval_email).with(user)
 ```
 
-<!-- wp:paragraph -->
-<p class=""></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p class="">if we use the <code>with</code> syntax while calling mailers, we can do this:</p>
-<!-- /wp:paragraph -->
+if we use the `with` syntax while calling mailers, we can do this:
 
 ```json
 context 'when user is a partner owner' do
@@ -62,11 +42,7 @@ context 'when user is a partner owner' do
     end
 ```
 
-<!-- wp:list -->
-<ul class=""><!-- wp:list-item -->
-<li class="">Here while asserting, we are not actually testing the mailer method called.</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
+- Here while asserting, we are not actually testing the mailer method called.
 
 ```json
 Sidekiq::Testing.inline! do
@@ -83,20 +59,8 @@ Sidekiq::Testing.inline! do
       end
 ```
 
-<!-- wp:list -->
-<ul class=""><!-- wp:list-item -->
-<li class="">This is if we actually wanna test the delivery of the email without mocking</li>
-<!-- /wp:list-item -->
+- This is if we actually wanna test the delivery of the email without mocking
+- Issue is that we are not testing the entire email body.
+- If it fails, include statement is heard to read.
 
-<!-- wp:list-item -->
-<li class="">Issue is that we are not testing the entire email body.</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li class="">If it fails, include statement is heard to read.</li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p class="">Other type of mailer test is to test this mailer class as a unit test individually.</p>
-<!-- /wp:paragraph -->
+Other type of mailer test is to test this mailer class as a unit test individually.
