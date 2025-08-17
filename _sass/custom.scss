@@ -332,19 +332,4 @@ a code {
   }
 }
 
-/* ===== MINIMAL SIDEBAR RESPONSIVE ===== */
 
-@media (max-width: 992px) {
-  #minimal-sidebar {
-    position: relative;
-    top: auto;
-    left: auto;
-    margin-bottom: 2rem;
-    width: 100%;
-    text-align: center;
-  }
-
-  body:not(.home-layout) #main-wrapper .container {
-    padding-left: 1rem;
-  }
-}
