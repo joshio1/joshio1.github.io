@@ -1,14 +1,14 @@
 ---
-title: "Kamal Series Part 1: Deploy Rails application on Hetzner"
+title: "Kamal Series: Deploy Rails application on AWS"
 date: 2023-11-02 06:00:28
-categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
+categories: ['aws', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
 <a href="https://kamal-deploy.org/">Kamal</a> is a new shiny way to deploy Rails applications <a href="https://world.hey.com/dhh/introducing-kamal-9330a267">announced by DHH</a> back in February 2023 and also spoke about it in his <a href="https://www.youtube.com/watch?v=iqXjGiQ_D-A">RailsWorld Keynote</a>. Now that <a href="https://www.heroku.com/">Heroku</a> has <a href="https://help.heroku.com/RSBRUH58/removal-of-heroku-free-product-plans-faq#:~:text=For%20non%2DEnterprise%20users%2C%20free,will%20be%20converted%20to%20mini%20.">removed their free tier</a>, Kamal has become excitingly popular since it also resonates with the idea of "<a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">leaving the cloud</a>". Most importantly, Kamal is free and <a href="https://github.com/basecamp/kamal">open source</a> and is developed by the folks from <a href="https://basecamp.com/">Basecamp</a> who created Rails.
 
-This means we need to purchase our own server for deploying our Rails application. There are several choices for purchasing like: <a href="https://www.digitalocean.com/">Digital Ocean</a> or <a href="https://aws.amazon.com/?nc2=h_lg">AWS</a> or <a href="https://www.hetzner.com/cloud">Hetzner</a>. We are going to use Hetzner which is one of the crowd favorites. It also gives you the best bang for buck! (We can run our entire Rails application for as little as 4 euros!!!)
+This means we need to purchase our own server for deploying our Rails application. There are several choices for purchasing like: <a href="https://www.digitalocean.com/">Digital Ocean</a> or <a href="https://aws.amazon.com/?nc2=h_lg">AWS</a> or <a href="https://www.hetzner.com/cloud">Hetzner</a>. We are going to use AWS which is widely used and has a free tier.
 
-This is Part 1 of the Kamal Rails series. In this article, I will cover a basic way of deploying a vanilla Rails application on Hetzner Cloud.
+This is part of the Kamal Rails series. In this article, I will cover a basic way of deploying a vanilla Rails application on AWS.
 
 ## Pre-Requisites:
 
@@ -25,42 +25,37 @@ If you don't have a Rails application created yet, you can do so using:
 rails new kamal_demo -T -m https://raw.githubusercontent.com/joshio1/rails_application_template/main/application_template.rb
 ```
 
-- Account on Hetzner Cloud such that we are ready to create Projects/Servers.
-
-Normally, it takes around a day for the account to be verified after our details are entered.
+- Account on AWS such that we are ready to create EC2 and Amazon RDS(managed database) instances.
 
 
 
 
 ## Steps:
 
-### 1. Create a VPS on Hetzer Cloud
+### 1. Create an EC2 instance in AWS
 
-- Login to Hetzner Cloud and create a new "Project".
+- Login into AWS
+- Create a key value pair using our public key which we can use to SSH in our instance.
+  - Go to Key Value pairs and click on "Import"
+  - Name the key value pair as `test-laptop`
+  - Use this command to copy our public key to the clipboard.
+  ```bash
+    pbcopy < ~/.ssh/id_rsa.pub
+  ```
+  - Copy this public key to the key value pair
+  - Click create
 
-![](/assets/images/2023/11/image-1024x373.png)
-
-- After a project is created, add a server to that project by clicking the "Add Server" button below:
-
-![](/assets/images/2023/11/image-1-1024x508.png)
-
-- Select the location for your server and also choose the operating system. In this example, we are going to choose Ubuntu.
-- Selected `Shared vCPU(x86) and CPX11` (which is the first plan)
-
-![](/assets/images/2023/11/image-2.png)
-
-- Choose IPv6 and IPv4 both
-- Add an SSH key to our server. Below command is how we can copy our public key to the clipboard. Use that to paste in the SSH section on Hetzner cloud while creating the server.
-
-```bash
-pbcopy < ~/.ssh/id_rsa.pub
-```
+- Go to EC2 and click on "Launch Instance".
+  - Select free tier and let's choose Ubuntu as an OS for this example.
+  - Keep all default configurations for creating an EC2 instance.
+  - Use the above created key value pair in the SSH configuration while creating an EC2 instance
+  - This will ensure we can access this EC2 instance from our local laptop.
 
 - That's it. We don't need any more configurations on the server. Click on `Create and Buy Now`
-- It will take around 1 or 2 minutes to create the server. We also get an email from Hetzner. Make sure the server is green and has an IPv4 address next to it. Check if we can SSH to the created server by doing:
+- Verify we are able to SSH to the created server by doing:
 
 ```bash
-ssh root@<ipv4_address_of_the_server>
+ssh ubuntu@<public_ip_address_of_the_ec2_instance>
 ```
 
 ## 2. Getting our Rails repository ready for deployment
@@ -162,6 +157,20 @@ Set `force_ssl=false` in `config/production.rb`{: .filepath} - This is because w
 - Note that we will configure HTTPS in upcoming parts of this Kamal series.
 
 
+## 4. Install Docker manually on the EC2 instance
+
+- Kamal does not install Docker automatically on the remote server since we use a different user other than `root`. Even though `ubuntu` user has `sudo` privileges, we need to install Docker manually.
+- We can do this by SSHing to the remote server and running the following commands:
+
+```bash
+sudo apt-get update
+sudo apt-get install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+## 5. Deployment
+
 
 After we have done making these changes, this is the final command required to deploy our Rails application to the Hetzner server: 
 
@@ -197,7 +206,7 @@ After we have done making these changes, this is the final command required to d
 ```
 
 
-- Since our container is healthy and all the steps have successfully completed, we can navigate to the  URL of our server and see if it is up. Go to: `<SERVER_IP>/up` and we should see a green screen like this:
+- Since our container is healthy and all the steps have successfully completed, we can navigate to the URL of our server and see if it is up. Go to: `<SERVER_IP>/up` and we should see a green screen like this:
 
 ![](/assets/images/2023/11/image-3-1024x541.png)
 
