@@ -105,8 +105,8 @@ kamal init
       - For production environment, it is located in `config/credentials/production.key` of our Rails application which is used to decrypt Rails credentials.
         - If `config/credentials` folder is not present, run `EDITOR=vim rails credentials:edit --environment production` to create the production credentials file and master key.
     - Once you have these two keys ready, there are 3 different ways to set it up.
-    - These keys need to be defined in `.kamal/secrets` file from where Kamal (deploy.yml) can access them.
-    - These are the three ways to define them in the `.kamal/secrets` file.
+    - These keys need to be defined in `.kamal/secrets` file from where Kamal (deploy.yml) can access them. The `.kamal/secrets` file can be committed into git because the credentials are actually present somewhere else. We just define them in this file.
+    - These are the three ways to define them in `.kamal/secrets` file.
       - First way is to create a `.env` file and load the keys using `direnv`
       - Second way is to read secrets via a command like `rails credentials:fetch kamal.registry_password`
       - Third way is to use a third party tool like `1password` and then fetch the keys using `kamal secrets` 
