@@ -1,6 +1,6 @@
 ---
 title: "Kamal Series: Deploy Rails application on AWS"
-date: 2023-11-02 06:00:28
+date: 2025-12-18 06:00:28
 categories: ['aws', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
