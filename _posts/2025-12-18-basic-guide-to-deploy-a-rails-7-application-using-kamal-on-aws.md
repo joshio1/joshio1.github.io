@@ -169,7 +169,7 @@ sudo systemctl enable docker
 ## 5. Deployment
 
 
-After we have done making these changes, this is the final command required to deploy our Rails application to the Hetzner server: 
+After we have done making these changes, this is the final command required to deploy our Rails application to the EC2 instance: 
 
 
 `kamal setup`
@@ -209,10 +209,22 @@ After we have done making these changes, this is the final command required to d
 
 - If there are any errors during `kamal setup` command or this green is not visible, please refer to the `Important Points` section below for more information.
 
+## Important Points:
+
+- If your initializers access Rails credentials, you may need to modify your Dockerfile such that they use RAILS_MASTER_KEY when loading assets.
+  - This can be done like this after setting Dockerfile version to >= 1.4:
+    ```bash
+      RUN --mount=type=secret,id=RAILS_MASTER_KEY \
+      SECRET_KEY_BASE_DUMMY=1 \
+      RAILS_MASTER_KEY="$(cat /run/secrets/RAILS_MASTER_KEY)" \
+      ./bin/rails assets:precompile
+    ```
+- 
+
 ## Next Part: Add Postgres to your Rails application
 
 - So far we have only deployed a basic Rails application with SQLite. In Part 2 of this series, we will deploy a Rails application backed by Postgres.
-- <a href="https://joshio1.blog/add-postgres-on-rails-application-deplyed-using-kamal/">Click HERE to go to the next part in this Kamal series</a>
+- <a href="https://joshio1.com/add-postgres-on-rails-application-deplyed-using-kamal/">Click HERE to go to the next part in this Kamal series</a>
 
 **NOTE**:
 
