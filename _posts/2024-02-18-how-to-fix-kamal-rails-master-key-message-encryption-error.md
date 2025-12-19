@@ -4,7 +4,7 @@ date: 2024-02-18 13:05:36
 categories: ['Kamal', 'Rails']
 ---
 
-When <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">deploying a Rails application using Kamal</a>, we set `RAILS_MASTER_KEY` in our `.env` file. However, this `RAILS_MASTER_KEY` is for our production environment. When we try to run the same application on our development environment, we get `ActiveSupport::MessageEncryptor::InvalidMessage` error because Rails is not able to decrypt the development credentials file. This article will show you how to fix this Master Key Encryption error when using <a href="https://github.com/ddollar/foreman">foreman</a> to start the development environment.
+When <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">deploying a Rails application with Kamal</a>, you set `RAILS_MASTER_KEY` in your `.env` file for production. However, when running the same application in development, you'll get an `ActiveSupport::MessageEncryptor::InvalidMessage` error because Rails can't decrypt the development credentials file with the production key. This article shows how to fix this issue when using <a href="https://github.com/ddollar/foreman">foreman</a> to start your development environment.
 
 This is a typical stack trace we get when this happens:
 
@@ -25,30 +25,28 @@ This is a typical stack trace we get when this happens:
 18:12:06 web.1    |     from /Users/omkarjoshi/Projects/rubypodcatcher/.bundle/ruby/3.2.0/gems/railties-7.1.1/lib/rails/initializable.rb:32:in `run'
 ```
 
-In this case, we have typically run the Rails application in our development environment using the `bin/dev` command and we use `<a href="https://github.com/ddollar/foreman">foreman</a>` in our `Procfile.dev`.
+This typically happens when running your Rails application locally with `bin/dev` using <a href="https://github.com/ddollar/foreman">foreman</a> in your `Procfile.dev`.
 
-## The Fix:
+## The Solution
 
-- Create a separate environment variable file for our local environment:
+Create a separate environment variable file for local development:
 
 ```bash
 # .env.local
-
 RAILS_MASTER_KEY=<development_master_key>
 ```
 
-- Explicitly specify this environment variable when foreman starts in Procfile.dev
+Update your `Procfile.dev` to explicitly use this file:
 
 ```bash
 # Procfile.dev
-
 exec foreman start -e .env.local -f Procfile.dev "$@"
 ```
 
-## Why does this work?
+## Why This Works
 
-- Earlier our Procfile.dev, simply started foreman using this command: `exec foreman start -f Procfile.dev "*$@*"`. This command automatically picks up the `.env` file which is present in the root directory.
-- In our case, this `.env` file has configuration for the production environment which are required for Kamal.
-- In our fix, we explicitly point foreman to a different "local" environment variable file which gets rid of this error.
+- Previously, `Procfile.dev` ran `exec foreman start -f Procfile.dev "$@"`, which automatically loaded your `.env` file
+- Your `.env` file contains production configuration needed for Kamal
+- By explicitly pointing foreman to `.env.local`, you use your development master key instead, resolving the decryption error
 
-Check out <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">my Rails Kamal Series</a> for step by step guide to deploy Rails application using Kamal.
+For a complete guide to deploying Rails with Kamal, see the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.

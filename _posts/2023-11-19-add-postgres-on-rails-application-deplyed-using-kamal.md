@@ -4,21 +4,21 @@ date: 2023-11-19 08:16:48
 categories: ['hetzner', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
-In Part 1 of this Kamal Series, <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">we have deployed a vanilla Rails application to our remote server using Kamal</a>. A vanilla Rails application ships with SQLite as a database by default. Many times though, we use Postgres as our database. This article is to add Postgres configuration to our Rails application and deploy using Kamal. Note that we are going to deploy Postgres on the same server using Kamal where our Rails application is hosted.
+In <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1 of this Kamal series</a>, we deployed a vanilla Rails application to a remote server using Kamal. By default, Rails applications use SQLite, but most production applications require Postgres. This article shows how to configure Postgres and deploy it on the same server as your Rails application using Kamal.
 
-This article assumes that you have a Rails application backed by Postgres running on your local environment. If you have some other database other than Postgres(like MySQL), you can follow the same set of instructions below and adapt them for your database provider. If you use SQLite, feel free to skip this article and go to the next part.
+This article assumes you have a Rails application backed by Postgres running locally. If you use a different database like MySQL, you can adapt these instructions accordingly. If you're using SQLite, you can skip this article.
 
-There are two ways of deploying Postgres with a Rails application:
+There are two approaches to deploying Postgres with a Rails application:
 
-1. on the same VM (where the server is running)
-2. using a managed database service
+1. On the same VM as your application
+2. Using a managed database service
 
-In this article, we are going to do it using the first option, i.e. deploying Postgres on the same server where our Rails application is hosted. If you want to use a managed database service, you can refer to <a href="/posts/add-rds-to-rails-application-deplyed-using-kamal/">this article</a> where I talk about using AWS RDS.
+This article covers the first approach—deploying Postgres on the same server as your Rails application. For a managed database service, see the <a href="/posts/add-rds-to-rails-application-deplyed-using-kamal/">AWS RDS article</a>.
 
-## Step 1: Add database configuration in `deploy.yml`{: .filepath} file
+## Step 1: Configure the Database in deploy.yml
 
-- Add db configuration under accessories section of your `config/deploy.yml`{: .filepath}
-- Here is what the `config/deploy.yml`{: .filepath} file should like:
+- Add database configuration under the accessories section of your `config/deploy.yml`
+- Your `config/deploy.yml` should look like:
 
 ```yaml
 # config/deploy.yml file
@@ -49,56 +49,60 @@ accessories:
       - data:/var/lib/postgresql/data
 ```
 
-## Step 2: Add configuration in `.env` file
+## Step 2: Configure Environment Variables
 
-- Add `POSTGRES_PASSWORD` to your `.env` file
+- Add `POSTGRES_PASSWORD` to your `.env` file:
 
 ```bash
-//.env file
-
+# .env file
 KAMAL_REGISTRY_PASSWORD=<docker_password>
 RAILS_MASTER_KEY=<master_key_of_production_environment>
-POSTGRES_PASSWORD=
+POSTGRES_PASSWORD=<secure_password>
 ```
 
-- We can set any arbitrary password for `POSTGRES_PASSWORD`. Make sure that this value is not made public or pushed to version control.
+- Choose a strong password for `POSTGRES_PASSWORD` and keep it secure. Never commit this file to version control.
 
-## Step 3: Change config/database.yml
+## Step 3: Update database.yml
 
-- We also need to change our `config/database.yml`{: .filepath} file so that it picks up the correct environment variables.
+- Update your `config/database.yml` to use environment variables:
 
-#config/database.yml
-
+```yaml
+# config/database.yml
 production:
   <<: *default
   host: <%= ENV["DB_HOST"] %>
   username: <%= ENV["POSTGRES_USER"] %>
   database: <%= ENV["POSTGRES_DB"] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
+```
 
-## Step 4: Run deploy commands
+## Step 4: Deploy Your Application
 
-- After we have made all the necessary configuration changes, it's time to deploy to the remote server.
-- Run these commands on your terminal:
+After completing the configuration above, deploy to your remote server:
 
+```bash
 kamal env push
 kamal accessory boot db
 kamal deploy
+```
 
-- If we would like to clean the existing server and deploy using this our new configuration with Postgres, we can use these commands:
+To reset the server and deploy with the new Postgres configuration:
 
+```bash
 kamal remove
 kamal setup
+```
 
-## Gotchas:
+## Important Notes
 
-- This is a basic configuration for deploying PostgreSQL on your remote server. Note that this is for deploying database on the same machine as your Rails server.
-- This does not cater to advanced configuration of having Postgres on a different machine or other complex requirements. Keep following my blog as I write more on these topics.
+- This configuration deploys Postgres on the same machine as your Rails application
+- For advanced setups with Postgres on a separate machine or other complex requirements, refer to the AWS RDS article
 
-## Next Part: Access server using HTTPS
+## Next Part: Enable HTTPS
 
-- So far, we have only accessed our remote server using HTTP.
-- <a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Click HERE to go to the next part to access your server using HTTPS.</a>
+So far, we've accessed the server using HTTP. In the next part, we'll configure HTTPS and SSL certificates.
+
+<a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Continue to Part 3</a>
 
 **NOTE**:
 

@@ -4,27 +4,27 @@ date: 2023-11-19 06:14:59
 categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
-Kamal is still it in its early stages and is getting battle-tested. While we try to use Kamal to deploy our Rails applications, there are several instances where we mess things up on the server and we would like to start from scratch. There is no `rails db:reset` command or similar. So how do we start from scratch and get back to our original state?
+Kamal is still in its early stages and is being battle-tested. While deploying Rails applications with Kamal, you may occasionally need to reset your server and start fresh. Unlike Rails, there's no built-in reset command. Here's how to reset your Kamal deployment.
 
-## Step 1: Remove kamal
+## Step 1: Remove Kamal
 
-```shell
+```bash
 kamal remove
 ```
 
-- This will remove all the app and accessory containers from your server. It will also remove the environment variables and bring back the server to its original state.
+This removes all application and accessory containers from your server, clears environment variables, and returns the server to its original state.
 
-## Step 2: Setup Kamal
+## Step 2: Set Up Kamal Again
 
-```shell
+```bash
 kamal setup
 ```
 
-- This will initialize Kamal which means it will add the environment variables and also deploy all the containers.
+This reinitializes Kamal, configures environment variables, and deploys all containers.
 
-Ofcourse, the other option is to just delete the server and start again from scratch by running those two commands. But deleting the server is not always an option and the above two commands should serve you well for resetting the environment.
+Alternatively, you could delete the server entirely and start over, but that's not always practical. These two commands provide a clean reset without losing your server.
 
-Please check <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">this article</a> for more information  on how to deploy a Rails application on a Hetzner instance.
+For more information on deploying a Rails application on Hetzner, see <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">this article</a>.
 
 References:
 

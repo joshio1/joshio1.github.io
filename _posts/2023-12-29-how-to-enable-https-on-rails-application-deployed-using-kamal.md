@@ -4,18 +4,13 @@ date: 2023-12-29 14:29:20
 categories: ['hetzner', 'HTTPS', 'Kamal', 'kamal', 'LetsEncrypt', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails', 'SSL']
 ---
 
-This is Part 3 of my Kamal Rails Series. So far, <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">we've deployed a Rails application and accessed the application using the HTTP protocol</a>. However, in production, we rarely do this and always deploy our application using HTTPS recommended secure way with an SSL certificate. This article is to add HTTPS and SSL configuration to our already deployed Rails application using Kamal.
+This is Part 3 of the Kamal Rails series. So far, <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">we've deployed a Rails application and accessed it using HTTP</a>. In production, we always use HTTPS with an SSL certificate for security. This article shows how to add HTTPS and SSL configuration to your deployed Rails application using Kamal.
 
-## Pre-Requisites
+## Prerequisites
 
-- Already deployed Rails application using Kamal
-- Can access the Rails application using `<SERVER_IP>/up` command.
-
-This GET request should return a 200 OK response.
-
-
-
-Bought a domain on any domain provider like <a href="https://www.namecheap.com/">Namecheap</a> or <a href="https://www.godaddy.com/en-in">GoDaddy</a>
+- A Rails application already deployed with Kamal
+- Ability to access the application at `<SERVER_IP>/up` (should return 200 OK)
+- A domain purchased from a provider like <a href="https://www.namecheap.com/">Namecheap</a> or <a href="https://www.godaddy.com/en-in">GoDaddy</a>
 
 
 ## Step 1: Add traefik configuration to deploy.yml
@@ -80,12 +75,12 @@ traefik:
 
 - Replace <SERVER_IP> with the IP address of your remote server.
 
-## Step 2: Create LetsEncrypt acme file and docker network on remote server
+## Step 2: Create Let's Encrypt ACME File and Docker Network
 
-- We are going to use <a href="https://letsencrypt.org/">letsencrypt</a> for our HTTPS configuration as you may have seen from the `deploy.yml`{: .filepath} file above.
-- We will need to create an `acme.json`{: .filepath} file on the remote server for our `deploy.yml`{: .filepath} changes to work.
-- We also need to create a "private" Docker network changes which we use to communicate internally.
-- We can do that by SSHing to the remote server as follows:
+- We use <a href="https://letsencrypt.org/">Let's Encrypt</a> for HTTPS configuration (as shown in the `deploy.yml` above)
+- Create an `acme.json` file on the remote server for the configuration to work
+- Create a "private" Docker network for internal communication
+- SSH into the remote server and run:
 
 ```bash
 $ ssh root@<SERVER_IP>
@@ -93,12 +88,12 @@ root# mkdir -p /letsencrypt && touch /letsencrypt/acme.json && chmod 600 /letsen
 root# docker network create -d bridge private
 ```
 
-- We can also automate this by using Kamal hooks but this is just a one-time task and not needed for every deploy (of course)
+- You can automate this with Kamal hooks, but since it's a one-time setup, manual execution is fine
 
-## Step 3: Change force_ssl to true in `production.rb`{: .filepath}
+## Step 3: Enable force_ssl in production.rb
 
-- If you followed my <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">previous articles</a>, I had configured `config.force_ssl` to be `false` so that we can access our server using HTTP as well.
-- We need to revert this change and instead `force_ssl` should be set to `true`
+- In the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">previous articles</a>, we set `config.force_ssl` to `false` to allow HTTP access
+- Now, change it to `true` to enforce HTTPS:
 
 ```ruby
 # config/production.rb
@@ -107,25 +102,22 @@ root# docker network create -d bridge private
   config.force_ssl = true
 ```
 
-## Step 4: Allow inbound HTTPS connections
+## Step 4: Allow Inbound HTTPS Connections
 
-- We need to also allow inbound HTTPS connections to our remote server.
-- To do this, create a firewall and allow inbound connections to port 80 and 443 into the remote server.
+- Create a firewall rule to allow inbound connections on ports 80 (HTTP) and 443 (HTTPS)
 
 ![](/assets/images/2023/12/image-1-1024x546.png)
 
-## Step 5: Add A record and CNAME in domain provider settings
+## Step 5: Configure DNS Records
 
-- We need to point our domain to the IP address of our remote server.
-- To do this, we will need to add the following records in the DNS settings of our domain provider (i.e. wherever we have purchased our domain from)
-- We need to add an `A record` with `HOST` value of `@` and value will be the IP address of the remote server.
-- We also need to add a `CNAME record` with `HOST` value of `www` and value will be the name of our `domain` ending with `.com`.
-- Note that these settings might change based on your domain provider. Hence, please check with your domain provider. (Above settings are applicable for Namecheap which is where I have my domain from)
+- Point your domain to your remote server's IP address by adding DNS records in your domain provider's settings
+- Add an `A record` with `HOST` value of `@` pointing to your server's IP address
+- Add a `CNAME record` with `HOST` value of `www` pointing to your domain name (e.g., `example.com`)
+- Note: These settings vary by provider. The above applies to Namecheap.
 
-## Step 6: Deploy using Kamal
+## Step 6: Deploy Your Application
 
-- Once we are done with all the configuration, it is time to deploy our changes to the remote server.
-- We will run these following commands:
+After completing all configuration, deploy your changes:
 
 ```bash
 kamal setup
@@ -133,27 +125,26 @@ kamal deploy
 kamal traefik restart
 ```
 
-- After running these commands, if we visit our website directly using the domain name, we should be able to see our Rails application up and running.
+Your Rails application should now be accessible at your domain with HTTPS enabled.
 
 ![](/assets/images/2023/12/image-2-1024x569.png)
 
-- Other commands you might wanna try for debugging in case there was some error:
+For debugging, use:
 
 ```bash
 kamal traefik logs
 kamal app logs
 ```
 
-- Also, you can use `kamal env push` to push your environment variables and `kamal traefik reboot` to reboot traefik. Please check `kamal traefik help` for more information.
-- This concludes our steps to add HTTPS and SSL certificate to our Rails application using Kamal.
+You can also use `kamal env push` to update environment variables and `kamal traefik reboot` to restart Traefik. See `kamal traefik help` for more options.
 
-## Next Part: Sidekiq and Redis
+## Next Part: Configure Sidekiq and Redis
 
-- Click <a href="/posts/kamal-rails-series-configure-sidekiq-and-redis/">HERE</a> to read the next post where I talk about adding Redis and Sidekiq to our Kamal configuration.
-- Check out these previous articles from this series:
+<a href="/posts/kamal-rails-series-configure-sidekiq-and-redis/">Continue to Part 4</a> to add Redis and Sidekiq to your Kamal configuration.
 
-<a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploying a basic Rails application using Kamal on Hetzner</a>
-- <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to deployed Rails application using Kamal</a>
+**Previous articles in this series:**
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploy a basic Rails application using Kamal on Hetzner</a>
+- <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to your deployed Rails application</a>
 
 
 

@@ -4,19 +4,19 @@ date: 2023-11-02 06:00:28
 categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
-<a href="https://kamal-deploy.org/">Kamal</a> is a new shiny way to deploy Rails applications <a href="https://world.hey.com/dhh/introducing-kamal-9330a267">announced by DHH</a> back in February 2023 and also spoke about it in his <a href="https://www.youtube.com/watch?v=iqXjGiQ_D-A">RailsWorld Keynote</a>. Now that <a href="https://www.heroku.com/">Heroku</a> has <a href="https://help.heroku.com/RSBRUH58/removal-of-heroku-free-product-plans-faq#:~:text=For%20non%2DEnterprise%20users%2C%20free,will%20be%20converted%20to%20mini%20.">removed their free tier</a>, Kamal has become excitingly popular since it also resonates with the idea of "<a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">leaving the cloud</a>". Most importantly, Kamal is free and <a href="https://github.com/basecamp/kamal">open source</a> and is developed by the folks from <a href="https://basecamp.com/">Basecamp</a> who created Rails.
+<a href="https://kamal-deploy.org/">Kamal</a> is a modern deployment tool for Rails applications, <a href="https://world.hey.com/dhh/introducing-kamal-9330a267">announced by DHH</a> in February 2023 and featured in his <a href="https://www.youtube.com/watch?v=iqXjGiQ_D-A">RailsWorld Keynote</a>. With <a href="https://www.heroku.com/">Heroku</a> having <a href="https://help.heroku.com/RSBRUH58/removal-of-heroku-free-product-plans-faq#:~:text=For%20non%2DEnterprise%20users%2C%20free,will%20be%20converted%20to%20mini%20.">removed their free tier</a>, Kamal has gained significant traction, particularly for those interested in "<a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">leaving the cloud</a>". Most importantly, Kamal is free and <a href="https://github.com/basecamp/kamal">open source</a>, developed by the team at <a href="https://basecamp.com/">Basecamp</a> who created Rails.
 
-This means we need to purchase our own server for deploying our Rails application. There are several choices for purchasing like: <a href="https://www.digitalocean.com/">Digital Ocean</a> or <a href="https://aws.amazon.com/?nc2=h_lg">AWS</a> or <a href="https://www.hetzner.com/cloud">Hetzner</a>. We are going to use Hetzner which is one of the crowd favorites. It also gives you the best bang for buck! (We can run our entire Rails application for as little as 4 euros!!!)
+Using Kamal requires you to provision your own server. Popular options include <a href="https://www.digitalocean.com/">Digital Ocean</a>, <a href="https://aws.amazon.com/?nc2=h_lg">AWS</a>, and <a href="https://www.hetzner.com/cloud">Hetzner</a>. We'll use Hetzner, which offers excellent value—you can run a complete Rails application for as little as €4 per month.
 
-This is Part 1 of the Kamal Rails series. In this article, I will cover a basic way of deploying a vanilla Rails application on Hetzner Cloud.
+This is Part 1 of the Kamal Rails series. I'll walk you through deploying a vanilla Rails application on Hetzner Cloud.
 
-## Pre-Requisites:
+## Prerequisites
 
-- Docker is installed on our local environment. (Make sure the version is according to our OS)
-- Docker account is created on <a href="https://hub.docker.com/">Docker hub</a>.
-- You have a Rails application "created" using Rails > 6.0
+- Docker is installed on your local machine (ensure the version is compatible with your OS)
+- A Docker account created on <a href="https://hub.docker.com/">Docker Hub</a>
+- A Rails application using Rails 6.0 or later
 
-If you don't have a Rails application created yet, you can do so using:
+If you don't have a Rails application yet, create one using:
 
 
 
@@ -25,56 +25,52 @@ If you don't have a Rails application created yet, you can do so using:
 rails new kamal_demo -T -m https://raw.githubusercontent.com/joshio1/rails_application_template/main/application_template.rb
 ```
 
-- Account on Hetzner Cloud such that we are ready to create Projects/Servers.
-
-Normally, it takes around a day for the account to be verified after our details are entered.
+- A Hetzner Cloud account ready to create projects and servers (account verification typically takes about a day)
 
 
 
 
 ## Steps:
 
-### 1. Create a VPS on Hetzer Cloud
+### 1. Create a VPS on Hetzner Cloud
 
-- Login to Hetzner Cloud and create a new "Project".
+- Log in to Hetzner Cloud and create a new project
 
 ![](/assets/images/2023/11/image-1024x373.png)
 
-- After a project is created, add a server to that project by clicking the "Add Server" button below:
+- After creating the project, add a server by clicking "Add Server"
 
 ![](/assets/images/2023/11/image-1-1024x508.png)
 
-- Select the location for your server and also choose the operating system. In this example, we are going to choose Ubuntu.
-- Selected `Shared vCPU(x86) and CPX11` (which is the first plan)
+- Select your server location and operating system (we'll use Ubuntu)
+- Choose `Shared vCPU (x86) and CPX11` (the first plan)
 
 ![](/assets/images/2023/11/image-2.png)
 
-- Choose IPv6 and IPv4 both
-- Add an SSH key to our server. Below command is how we can copy our public key to the clipboard. Use that to paste in the SSH section on Hetzner cloud while creating the server.
+- Select both IPv6 and IPv4
+- Add an SSH key to your server. Copy your public key to the clipboard:
 
 ```bash
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
-- That's it. We don't need any more configurations on the server. Click on `Create and Buy Now`
-- It will take around 1 or 2 minutes to create the server. We also get an email from Hetzner. Make sure the server is green and has an IPv4 address next to it. Check if we can SSH to the created server by doing:
+- Paste the key in the SSH section on Hetzner Cloud and click "Create and Buy Now"
+- The server will be created in 1-2 minutes. You'll receive an email from Hetzner. Verify the server is active and has an IPv4 address, then test SSH access:
 
 ```bash
 ssh root@<ipv4_address_of_the_server>
 ```
 
-## 2. Getting our Rails repository ready for deployment
+## 2. Prepare Your Rails Application for Deployment
 
-- Now navigate to the root directory of your Rails application and check if you have a `Dockerfile` already present.
+- Navigate to your Rails application's root directory and verify you have a `Dockerfile`
+- Rails 7.1 and later <a href="https://rubyonrails.org/2023/10/5/Rails-7-1-0-has-been-released">include a Dockerfile by default</a>
+- For earlier versions, use the <a href="https://github.com/fly-apps/dockerfile-rails">dockerfile-rails gem</a> to generate the necessary files
 
-If your Rails application was created on Rails version 7.1 or greater, <a href="https://rubyonrails.org/2023/10/5/Rails-7-1-0-has-been-released">Rails now by default ships with a Dockerfile</a>.
-- If not, we can use the <a href="https://github.com/fly-apps/dockerfile-rails">dockerfile-rails gem</a> for generating Dockerfile and related files.
+A `Dockerfile` is required because Kamal uses Docker images for deployment.
 
-
-
-Make sure you have a `Dockerfile` present because Kamal uses a docker image for deployment.
-
-Next thing is to make sure you have health check route. Again if your application was created on Rails version 7.1 or greater, you should have an `/up` route which determines whether your application is up or not.- If you don't have an `/up` health check route, you can add this following code to your `config/routes.rb`{: .filepath} file:
+- Ensure you have a health check route. Rails 7.1+ includes an `/up` route by default that indicates application health
+- If you don't have this route, add it to your `config/routes.rb` file:
 
 
 
@@ -83,53 +79,45 @@ get '/up', to: ->(env) { [204, {}, ['']] }
 ```
 
 
-- Once we have these two things (Dockerfile and the health check route), we should be all set to start using Kamal.
+- With a Dockerfile and health check route in place, you're ready to use Kamal.
 
-## 3. Using Kamal for deployment
+## 3. Deploy with Kamal
 
-- Install Kamal using:
+- Install Kamal:
 
 ```bash
 gem install kamal
 ```
 
-  - This will install Kamal 2 which is the latest version of Kamal in your gem environment (depending on the ruby version you are on).
+This installs Kamal 2, the latest version (version depends on your Ruby version).
 
-
-- Now, navigate to the Rails application repository (`kamal_demo`) and initialize Kamal
+- Navigate to your Rails application and initialize Kamal:
 
 ```bash
 cd kamal_demo
 kamal init
 ```
 
+This creates several files including `config/deploy.yml`, `.kamal/hooks`, and `.kamal/secrets`.
 
-- This will create a bunch of files like `config/deploy.yml`, `.kamal/hooks` and `.kamal/secrets`. 
-
-  - Let's start with the environment variables configuration first:
-    - First, you will need to create a Docker Registry key. Docker Registry Key can be found by logging in to your Docker account and going to `Account Settings > Security > New Access Token` to create a new access token.
-    - Second, you will need a `RAILS_MASTER_KEY`.
-      - `RAILS_MASTER_KEY` is used in decrypting your credentials located at `config/credentials/production.yml.enc` or `config/credentials.yml.enc`
-      - For production environment, it is located in `config/credentials/production.key` of our Rails application which is used to decrypt Rails credentials.
-        - If `config/credentials` folder is not present, run `EDITOR=vim rails credentials:edit --environment production` to create the production credentials file and master key.
-    - Once you have these two keys ready, there are 3 different ways to set it up.
-    - These keys need to be defined in `.kamal/secrets` file from where Kamal (deploy.yml) can access them.
-    - These are the three ways to define them in the `.kamal/secrets` file.
-      - First way is to create a `.env` file and load the keys using `direnv`
-      - Second way is to read secrets via a command like `rails credentials:fetch kamal.registry_password`
-      - Third way is to use a third party tool like 1password and then fetch the keys using 
-    - In the second way, we will need to be on the latest Rails which has support for commands like `credentials:fetch`
-    - We will go with the first way for simplicity where we define an `.env` file in the root of our project.
-    - After defining them in `.env`, we will need to have these keys such that are available as environment variables in the command line when we do `export $KAMAL_REGISTRY_PASSWORD`
-      - In order to do this, we will use a gem called `direnv` which loads environment variables from `.env` file to our command line.
-    - This is how the `.env` file should look like:
+  - Configure environment variables:
+    - Create a Docker Registry access token by logging into your Docker account and navigating to `Account Settings > Security > New Access Token`
+    - Obtain your `RAILS_MASTER_KEY`, which decrypts your production credentials file (`config/credentials/production.yml.enc`)
+      - If you don't have a production credentials file, create one with: `EDITOR=vim rails credentials:edit --environment production`
+    - There are three ways to manage these secrets in `.kamal/secrets`:
+      1. Create a `.env` file and load it with `direnv`
+      2. Use `rails credentials:fetch kamal.registry_password` (requires latest Rails)
+      3. Use a third-party tool like 1Password with `kamal secrets`
+    - For simplicity, we'll use the first approach with a `.env` file
+    - Use [direnv](https://github.com/direnv/direnv/blob/master/docs/installation.md) to load environment variables from `.env` into your shell
+    - Your `.env` file should look like:
 
       ```bash
       KAMAL_REGISTRY_PASSWORD=<our_docker_access_token>
       RAILS_MASTER_KEY=<our_rails_production_master_key>
       ```
 
-- The `kamal init` command also creates a `config`/`deploy.yml` file. This file is responsible for storing the configuration of our Rails application which is necessary to deploy on a remote server. Edit this file and change it to something like this:
+- The `kamal init` command also creates a `config/deploy.yml` file. This file contains the configuration needed to deploy your Rails application. Edit it to match the following:
 
 ```yaml
 service: kamal_demo
@@ -150,25 +138,22 @@ env:
     - RAILS_MASTER_KEY
 ```
 
-- Some details about the above `config/deploy.yml` file:
+- Key details about the `config/deploy.yml` file:
+  - `joshio1` is your Docker username and `kamal_demo` is your Rails application name
+  - Kamal automatically references `KAMAL_REGISTRY_PASSWORD` and `RAILS_MASTER_KEY` from your `.env` file
+  - Replace `<ipv4_address_of_hetzner_server>` with your actual server IP
 
-  - Here `joshio1` is the `Docker` username and `kamal_demo` is the name of the Rails application
-  - Kamal automatically references `KAMAL_REGISTRY_PASSWORD` and `RAILS_MASTER_KEY` from the `.env` file when they are mentioned like this in the `config/deploy.yml`{: .filepath} file.
-  - `<ipv4_address_of_hetzer_server>` is pretty self-explanatory.
-
-
-
-Set `force_ssl=false` in `config/production.rb`{: .filepath} - This is because we haven't yet configured SSL certificates and we will only use HTTP to connect with our server.
-- Note that we will configure HTTPS in upcoming parts of this Kamal series.
+- Set `force_ssl = false` in `config/production.rb` since we haven't configured SSL certificates yet. We'll enable HTTPS in a later part of this series.
 
 
 
-After we have done making these changes, this is the final command required to deploy our Rails application to the Hetzner server: 
+After completing the configuration above, deploy your Rails application to the Hetzner server:
 
+```bash
+kamal setup
+```
 
-`kamal setup`
-
-- You should see output like this:
+You should see output similar to:
 
 ```bash
 -> kamal_demo git:(main) ✗ kamal setup
@@ -197,16 +182,17 @@ After we have done making these changes, this is the final command required to d
 ```
 
 
-- Since our container is healthy and all the steps have successfully completed, we can navigate to the  URL of our server and see if it is up. Go to: `<SERVER_IP>/up` and we should see a green screen like this:
+- Once the container is healthy and all steps complete successfully, verify the deployment by visiting `<SERVER_IP>/up` in your browser. You should see a green health check screen.
 
 ![](/assets/images/2023/11/image-3-1024x541.png)
 
-- If there are any errors during `kamal setup` command or this green is not visible, please refer to the `Important Points` section below for more information.
+- If you encounter errors during `kamal setup` or don't see the green screen, refer to the Important Points section below.
 
-## Next Part: Add Postgres to your Rails application
+## Next Part: Add Postgres to Your Rails Application
 
-- So far we have only deployed a basic Rails application with SQLite. In Part 2 of this series, we will deploy a Rails application backed by Postgres.
-- <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Click HERE to go to the next part in this Kamal series</a>
+So far, we've deployed a basic Rails application with SQLite. In Part 2 of this series, we'll deploy a Rails application backed by Postgres.
+
+<a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Continue to Part 2</a>
 
 **NOTE**:
 

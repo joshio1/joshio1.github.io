@@ -4,32 +4,30 @@ date: 2024-01-27 04:35:40
 categories: ['kamal', 'Kamal', 'Rails', 'redeploy', 'ruby on rails']
 ---
 
-What is the difference between kamal deploy and kamal redeploy? When using Kamal, when we do `kamal help`, there are two commands which seem similar. They are kamal deploy and kamal redeploy. In this article, we will find out the difference between both of those commands:
+When using Kamal, you'll encounter two similar-sounding commands: `kamal deploy` and `kamal redeploy`. Here's the difference between them.
 
 ## kamal deploy
 
-This is the documentation for `<a href="https://github.com/basecamp/kamal/blob/main/lib/kamal/cli/main.rb#L20">kamal deploy</a>`
+<a href="https://github.com/basecamp/kamal/blob/main/lib/kamal/cli/main.rb#L20">Documentation</a>: Deploy app to servers
 
-Deploy app to servers
+**Flags:**
+- `--skip_push` / `-P`: Skip image build and push
 
-Flags:
-option :skip_push, aliases: "-P", type: :boolean, default: false, desc: "Skip image build and push"
+Use this command for initial deployments and when you've made infrastructure changes.
 
 ## kamal redeploy
 
-This is the documentation for `<a href="https://github.com/basecamp/kamal/blob/main/lib/kamal/cli/main.rb#L61">kamal redeploy</a>`
+<a href="https://github.com/basecamp/kamal/blob/main/lib/kamal/cli/main.rb#L61">Documentation</a>: Deploy app to servers without bootstrapping servers, starting Traefik, pruning, and registry login
 
-Deploy app to servers without bootstrapping servers, starting Traefik, pruning, and registry login
+**Flags:**
+- `--skip_push` / `-P`: Skip image build and push
 
-Flags:
-option :skip_push, aliases: "-P", type: :boolean, default: false, desc: "Skip image build and push"
+`kamal redeploy` skips server setup steps that only need to run once, making it faster for subsequent deployments.
 
-As you can see from the documentation above, `kamal redeploy` just deploys the application to remote servers without doing anything else.
+## When to Use Each
 
-## Conclusion
+- **`kamal deploy`**: First deployment or when infrastructure configuration changes
+- **`kamal redeploy`**: Subsequent deployments with only application code changes (faster)
+- If `kamal redeploy` fails, `kamal deploy` is safe to use as a fallback
 
-- When deploying your application for the first time, use `kamal deploy`.
-- For subsequent deploys, you can use `kamal redeploy` . This should be faster since it doesn't do  bootstrapping servers, starting Traefik, pruning and registry login which are required just once.
-- If for some reason `kamal redeploy` doesn't work for subsequent deploys, feel free to use `kamal deploy`. It's not like `kamal deploy` will throw an error for subsequent deploys.
-
-If you're looking for a guide to deploy a Rails application using Kamal, check out the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.
+For a complete guide to deploying Rails with Kamal, see the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.
