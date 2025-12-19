@@ -4,7 +4,7 @@ date: 2025-12-17 08:16:48
 categories: ['RDS', 'AWS', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
-In Part 1 of this Kamal Series, <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">we have deployed a vanilla Rails application to our remote server using Kamal</a>. A vanilla Rails application ships with SQLite as a database by default. Many times though, we use Postgres as our database. This article is to add Postgres configuration to our Rails application and deploy using Kamal. Note that we are going to deploy Postgres on the same server using Kamal where our Rails application is hosted.
+In Part 1 of this Kamal Series, <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">we have deployed a vanilla Rails application to our remote server using Kamal</a>. A vanilla Rails application ships with SQLite as a database by default. Many times though, we use Postgres as our database. This article is to add Postgres configuration to our Rails application and deploy using Kamal. Note that we are going to deploy Postgres on the same server using Kamal where our Rails application is hosted.
 
 This article assumes that you have a Rails application backed by Postgres running on your local environment. If you have some other database other than Postgres(like MySQL), you can follow the same set of instructions below and adapt them for your database provider. If you use SQLite, feel free to skip this article and go to the next part.
 
@@ -111,11 +111,13 @@ DB_PASSWORD=<our_rds_password>
 - After we have made all the necessary configuration changes, it's time to deploy to the remote server.
 - Run:
 
-```bsh
+```bash
 kamal deploy
 ```
 
-## Gotchas:
+- This should deploy our Rails application with RDS as the database.
+
+- If you would like to see commonly used Kamal commands, check out <a href="/posts/kamal-quick-commands/">this article</a>.
 
 ## Next Part: Access server using HTTPS
 
