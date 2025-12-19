@@ -51,7 +51,7 @@ rails new kamal_demo -T -m https://raw.githubusercontent.com/joshio1/rails_appli
   - Use the above created key value pair in the SSH configuration while creating an EC2 instance
   - This will ensure we can access this EC2 instance from our local laptop.
 
-- That's it. We don't need any more configurations on the server. Click on `Create and Buy Now`
+- That's it. We don't need any more configurations on the server.
 - Verify we are able to SSH to the created server by doing:
 
 ```bash
@@ -61,17 +61,14 @@ ssh ubuntu@<public_ip_address_of_the_ec2_instance>
 ## 2. Getting our Rails repository ready for deployment
 
 - Now navigate to the root directory of your Rails application and check if you have a `Dockerfile` already present.
-
-If your Rails application was created on Rails version 7.1 or greater, <a href="https://rubyonrails.org/2023/10/5/Rails-7-1-0-has-been-released">Rails now by default ships with a Dockerfile</a>.
-- If not, we can use the <a href="https://github.com/fly-apps/dockerfile-rails">dockerfile-rails gem</a> for generating Dockerfile and related files.
+    - If your Rails application was created on Rails version 7.1 or greater, <a href="https://rubyonrails.org/2023/10/5/Rails-7-1-0-has-been-released">Rails now by default ships with a Dockerfile</a>.
+    - If not, we can use the <a href="https://github.com/fly-apps/dockerfile-rails">dockerfile-rails gem</a> for generating Dockerfile and related files.
 
 
 
 Make sure you have a `Dockerfile` present because Kamal uses a docker image for deployment.
 
-Next thing is to make sure you have health check route. Again if your application was created on Rails version 7.1 or greater, you should have an `/up` route which determines whether your application is up or not.- If you don't have an `/up` health check route, you can add this following code to your `config/routes.rb`{: .filepath} file:
-
-
+Next thing is to make sure you have health check route. Again if your application was created on Rails version 7.1 or greater, you should have an `/up` route which determines whether your application is up or not.- If you don't have an `/up` health check route, you can add this following code to your `config/routes.rb` file:
 
 ```routes.rb
 get '/up', to: ->(env) { [204, {}, ['']] }
@@ -112,11 +109,11 @@ kamal init
     - These are the three ways to define them in the `.kamal/secrets` file.
       - First way is to create a `.env` file and load the keys using `direnv`
       - Second way is to read secrets via a command like `rails credentials:fetch kamal.registry_password`
-      - Third way is to use a third party tool like 1password and then fetch the keys using 
+      - Third way is to use a third party tool like `1password` and then fetch the keys using `kamal secrets` 
     - In the second way, we will need to be on the latest Rails which has support for commands like `credentials:fetch`
     - We will go with the first way for simplicity where we define an `.env` file in the root of our project.
     - After defining them in `.env`, we will need to have these keys such that are available as environment variables in the command line when we do `export $KAMAL_REGISTRY_PASSWORD`
-      - In order to do this, we will use a gem called `direnv` which loads environment variables from `.env` file to our command line.
+      - In order to do this, we will need a tool like [direnv](https://github.com/direnv/direnv/blob/master/docs/installation.md) which loads environment variables from `.env` file to our command line.
     - This is how the `.env` file should look like:
 
       ```bash
@@ -130,7 +127,7 @@ kamal init
 service: kamal_demo
 image: joshio1/kamal_demo
 servers:
-  - <ipv4_address_of_Hetzner_server>
+  - <ipv4_address_of_ec2_instance>
 registry:
   username: joshio1
   password:
@@ -149,11 +146,11 @@ env:
 
   - Here `joshio1` is the `Docker` username and `kamal_demo` is the name of the Rails application
   - Kamal automatically references `KAMAL_REGISTRY_PASSWORD` and `RAILS_MASTER_KEY` from the `.env` file when they are mentioned like this in the `config/deploy.yml`{: .filepath} file.
-  - `<ipv4_address_of_hetzer_server>` is pretty self-explanatory.
+  - `<ipv4_address_of_ec2_instance>` is pretty self-explanatory.
 
 
 
-Set `force_ssl=false` in `config/production.rb`{: .filepath} - This is because we haven't yet configured SSL certificates and we will only use HTTP to connect with our server.
+Set `force_ssl=false` in `config/production.rb` - This is because we haven't yet configured SSL certificates and we will only use HTTP to connect with our server.
 - Note that we will configure HTTPS in upcoming parts of this Kamal series.
 
 
@@ -219,6 +216,6 @@ After we have done making these changes, this is the final command required to d
 
 **NOTE**:
 
-- If this article is out of date, please don't hesitate to contact me on Twitter from <a href="https://joshio1.blog/about-me/">this page</a> and I'll be happy to update it.
+- If this article is out of date, please don't hesitate to contact me on Twitter from <a href="https://joshio1.com/about/">this page</a> and I'll be happy to update it.
 - Listen to <a href="https://podcasts.apple.com/ee/podcast/012-dhh-joins-the-show-to-talk-rails-8-delegated/id1677373826?i=1000626547784">this podcast</a> where DHH talks about Rails and Kamal.
 - If you would like to search for specific terms or concepts or names in Ruby/Rails podcasts, check out <a href="https://rubypodcatcher.com/">rubypodcatcher.com</a>
