@@ -38,16 +38,16 @@ Normally, it takes around a day for the account to be verified after our details
 
 - Login to Hetzner Cloud and create a new "Project".
 
-![](https://joshio1.blog/wp-content/uploads/2023/11/image-1024x373.png)
+![](/assets/images/2023/11/image-1024x373.png)
 
 - After a project is created, add a server to that project by clicking the "Add Server" button below:
 
-![](https://joshio1.blog/wp-content/uploads/2023/11/image-1-1024x508.png)
+![](/assets/images/2023/11/image-1-1024x508.png)
 
 - Select the location for your server and also choose the operating system. In this example, we are going to choose Ubuntu.
 - Selected `Shared vCPU(x86) and CPX11` (which is the first plan)
 
-![](https://joshio1.blog/wp-content/uploads/2023/11/image-2.png)
+![](/assets/images/2023/11/image-2.png)
 
 - Choose IPv6 and IPv4 both
 - Add an SSH key to our server. Below command is how we can copy our public key to the clipboard. Use that to paste in the SSH section on Hetzner cloud while creating the server.
@@ -74,8 +74,10 @@ Next thing is to make sure you have health check route. Again if your applicatio
 
 
 
-
+```routes.rb
 get '/up', to: ->(env) { [204, {}, ['']] }
+```
+
 
 - Once we have these two things (Dockerfile and the health check route), we should be all set to start using Kamal.
 
@@ -164,7 +166,7 @@ Releasing the deploy lock...
 
 - Since our container is healthy and all the steps have successfully completed, we can navigate to the  URL of our server and see if it is up. Go to: `<SERVER_IP>/up` and we should see a green screen like this:
 
-![](https://joshio1.blog/wp-content/uploads/2023/11/image-3-1024x541.png)
+![](/assets/images/2023/11/image-3-1024x541.png)
 
 - If there are any errors during `kamal setup` command or this green is not visible, please refer to the `Important Points` section below for more information.
 

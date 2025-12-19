@@ -6,7 +6,7 @@ categories: ['Hotwire', 'Modal', 'Rails', 'Rails', 'Ruby', 'RubyOnRails', 'Stimu
 
 I was recently tasked with this feature to create a <a href="https://en.wikipedia.org/wiki/Modal_window">modal</a> in our <a href="https://m.signalvnoise.com/the-majestic-monolith/">Rails monolithic application</a> at work. This was the acceptance criteria in the ticket:
 
-![](https://joshio1.blog/wp-content/uploads/2023/03/image-1-1024x447.png)
+![](/assets/images/2023/03/image-1-1024x447.png)
 
 Bit of background:
 
@@ -17,11 +17,11 @@ Bit of background:
 
 We'll get how to do this in a bit but this is how the finished product looks like:
 
-![](https://joshio1.blog/wp-content/uploads/2023/03/image-2-1024x529.png)
+![](/assets/images/2023/03/image-2-1024x529.png)
 
 Clicking on the `View/Edit availability` opens a modal which looks like this:
 
-![](https://joshio1.blog/wp-content/uploads/2023/03/image-3-1024x655.png)
+![](/assets/images/2023/03/image-3-1024x655.png)
 
 Before we get into the details, I'll briefly talk write about the technologies we are going to implement this with:
 

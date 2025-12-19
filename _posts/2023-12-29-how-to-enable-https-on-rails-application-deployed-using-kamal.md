@@ -112,7 +112,7 @@ root# docker network create -d bridge private
 - We need to also allow inbound HTTPS connections to our remote server.
 - To do this, create a firewall and allow inbound connections to port 80 and 443 into the remote server.
 
-![](https://joshio1.blog/wp-content/uploads/2023/12/image-1-1024x546.png)
+![](/assets/images/2023/12/image-1-1024x546.png)
 
 ## Step 5: Add A record and CNAME in domain provider settings
 
@@ -135,7 +135,7 @@ kamal traefik restart
 
 - After running these commands, if we visit our website directly using the domain name, we should be able to see our Rails application up and running.
 
-![](https://joshio1.blog/wp-content/uploads/2023/12/image-2-1024x569.png)
+![](/assets/images/2023/12/image-2-1024x569.png)
 
 - Other commands you might wanna try for debugging in case there was some error:
 
