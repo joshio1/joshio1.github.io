@@ -10,6 +10,8 @@ This means we need to purchase our own server for deploying our Rails applicatio
 
 This is part of the Kamal Rails series. In this article, I will cover a basic way of deploying a vanilla Rails application on AWS.
 
+If you would like to deploy on the same server, check out <a href="https://joshio1.blog/add-postgres-on-rails-application-deplyed-using-kamal/">this article</a>.
+
 ## Pre-Requisites:
 
 - Docker is installed on our local environment. (Make sure the version is according to our OS)
@@ -221,6 +223,7 @@ After we have done making these changes, this is the final command required to d
     ```
 - Since we are running Kamal from a local repo, all our changes need to be committed into git so that it can be deployed. i.e. Kamal does not pick up uncommitted files.
 - Node version needs to be specific in the Dockerfile or else we will get a "definition not found" error.
+- If you get an error because you have Postgres instead of SQLite in your Rails application, please refer to the next article in this series about <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">adding Postgres to your Rails application</a>.
 
 ## Next Part: Add Postgres to your Rails application
 

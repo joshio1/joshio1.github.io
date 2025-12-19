@@ -8,6 +8,13 @@ In Part 1 of this Kamal Series, <a href="https://joshio1.blog/basic-guide-to-dep
 
 This article assumes that you have a Rails application backed by Postgres running on your local environment. If you have some other database other than Postgres(like MySQL), you can follow the same set of instructions below and adapt them for your database provider. If you use SQLite, feel free to skip this article and go to the next part.
 
+There are two ways of deploying Postgres with a Rails application:
+
+1. on the same VM (where the server is running)
+2. using a managed database service
+
+In this article, we are going to do it using the first option, i.e. deploying Postgres on the same server where our Rails application is hosted. If you want to use a managed database service, you can refer to <a href="https://joshio1.blog/add-rds-to-rails-application-deplyed-using-kamal/">this article</a> where I talk about using AWS RDS.
+
 ## Step 1: Add database configuration in `deploy.yml`{: .filepath} file
 
 - Add db configuration under accessories section of your `config/deploy.yml`{: .filepath}
