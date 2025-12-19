@@ -1,5 +1,5 @@
 ---
-title: "Kamal Series: Add AWS RDS to your Rails application using Kamal"
+title: "Kamal Rails on AWS Series Part 2: Add AWS RDS to your Rails application"
 date: 2025-12-17 08:16:48
 categories: ['RDS', 'AWS', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
@@ -116,11 +116,15 @@ Your Rails application should now be running with RDS as the database.
 
 For commonly used Kamal commands, see <a href="/posts/kamal-quick-commands/">this article</a>.
 
-## Next Part: Enable HTTPS
+## Next Steps
 
-So far, we've accessed the server using HTTP. In the next part, we'll configure HTTPS and SSL certificates.
+You've now completed the AWS series with a Rails application deployed on AWS with RDS. For additional Kamal configuration topics, check out:
 
-<a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Continue to Part 3</a>
+- <a href="/posts/kamal-rails-series-configure-sidekiq-and-redis/">Configure Redis and Sidekiq with Kamal</a>
+- <a href="/posts/kamal-quick-commands/">Kamal Quick Commands</a>
+
+**Previous articles in this AWS series:**
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">Part 1: Deploy Rails application on AWS</a>
 
 **NOTE**:
 

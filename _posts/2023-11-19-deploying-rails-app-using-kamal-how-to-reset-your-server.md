@@ -24,7 +24,9 @@ This reinitializes Kamal, configures environment variables, and deploys all cont
 
 Alternatively, you could delete the server entirely and start over, but that's not always practical. These two commands provide a clean reset without losing your server.
 
-For more information on deploying a Rails application on Hetzner, see <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">this article</a>.
+For complete guides to deploying Rails with Kamal, see:
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Kamal Rails on Hetzner Series</a>
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">Kamal Rails on AWS Series</a>
 
 References:
 

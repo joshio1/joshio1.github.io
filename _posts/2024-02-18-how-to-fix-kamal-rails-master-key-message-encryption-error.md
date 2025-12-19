@@ -49,4 +49,6 @@ exec foreman start -e .env.local -f Procfile.dev "$@"
 - Your `.env` file contains production configuration needed for Kamal
 - By explicitly pointing foreman to `.env.local`, you use your development master key instead, resolving the decryption error
 
-For a complete guide to deploying Rails with Kamal, see the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.
+For complete guides to deploying Rails with Kamal, see:
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Kamal Rails on Hetzner Series</a>
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">Kamal Rails on AWS Series</a>

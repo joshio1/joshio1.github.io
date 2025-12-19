@@ -121,12 +121,16 @@ irb(main):005:0> DummyJob.perform_async
 
 ## Summary
 
-This article demonstrates how to deploy Sidekiq and Redis with Kamal on a Rails application. Note that <a href="https://dev.37signals.com/introducing-solid-queue/">Rails 8 introduces SolidQueue</a>, which uses the database instead of Redis for job storage. I'll cover <a href="https://github.com/basecamp/solid_queue">SolidQueue</a> with Kamal in a future article.
+This article demonstrates how to deploy Sidekiq and Redis with Kamal on a Rails application. This configuration works with both the Hetzner and AWS series. Note that <a href="https://dev.37signals.com/introducing-solid-queue/">Rails 8 introduces SolidQueue</a>, which uses the database instead of Redis for job storage. I'll cover <a href="https://github.com/basecamp/solid_queue">SolidQueue</a> with Kamal in a future article.
 
-**Previous articles in this series:**
-- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploy a basic Rails application using Kamal on Hetzner</a>
+**Hetzner Series:**
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploy Rails application on Hetzner</a>
 - <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to your deployed Rails application</a>
-- <a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Part 3: Configure SSL with Kamal</a>
+- <a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Part 3: Enable HTTPS and SSL Certificate</a>
+
+**AWS Series:**
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">Part 1: Deploy Rails application on AWS</a>
+- <a href="/posts/add-rds-to-rails-application-deplyed-using-kamal/">Part 2: Add AWS RDS to your Rails application</a>
 
 
 

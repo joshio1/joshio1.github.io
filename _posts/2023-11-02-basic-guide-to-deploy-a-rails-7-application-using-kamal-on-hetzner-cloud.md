@@ -1,5 +1,5 @@
 ---
-title: "Kamal Series Part 1: Deploy Rails application on Hetzner"
+title: "Kamal Rails on Hetzner Series Part 1: Deploy Rails application on Hetzner"
 date: 2023-11-02 06:00:28
 categories: ['hetzner', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
@@ -190,9 +190,9 @@ You should see output similar to:
 
 ## Next Part: Add Postgres to Your Rails Application
 
-So far, we've deployed a basic Rails application with SQLite. In Part 2 of this series, we'll deploy a Rails application backed by Postgres.
+So far, we've deployed a basic Rails application with SQLite. In Part 2 of this Hetzner series, we'll deploy a Rails application backed by Postgres.
 
-<a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Continue to Part 2</a>
+<a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Continue to Part 2: Add Postgres</a>
 
 **NOTE**:
 

@@ -1,7 +1,7 @@
 ---
-title: "Kamal Rails Series: Kamal Quick Commands"
+title: "Kamal Quick Commands"
 date: 2025-12-15 14:29:20
-categories: ['hetzner', 'HTTPS', 'Kamal', 'kamal', 'LetsEncrypt', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails', 'SSL']
+categories: ['Kamal', 'kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
 Here are some commonly used Kamal commands that I find helpful during development and deployment.
@@ -29,3 +29,9 @@ Here are some commonly used Kamal commands that I find helpful during developmen
   - Check SSH connectivity to the server
 - `ssh -vvv ubuntu@<public_ip>`
   - Connect to the EC2 instance with verbose output for debugging
+
+## Related Series
+
+For complete guides to deploying Rails with Kamal, see:
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Kamal Rails on Hetzner Series</a>
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">Kamal Rails on AWS Series</a>

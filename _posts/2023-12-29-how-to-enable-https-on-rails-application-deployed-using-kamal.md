@@ -1,5 +1,5 @@
 ---
-title: "Kamal Rails Series Part 3: Enable HTTPS and SSL Certificate"
+title: "Kamal Rails on Hetzner Series Part 3: Enable HTTPS and SSL Certificate"
 date: 2023-12-29 14:29:20
 categories: ['hetzner', 'HTTPS', 'Kamal', 'kamal', 'LetsEncrypt', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails', 'SSL']
 ---
@@ -138,12 +138,15 @@ kamal app logs
 
 You can also use `kamal env push` to update environment variables and `kamal traefik reboot` to restart Traefik. See `kamal traefik help` for more options.
 
-## Next Part: Configure Sidekiq and Redis
+## Next Steps
 
-<a href="/posts/kamal-rails-series-configure-sidekiq-and-redis/">Continue to Part 4</a> to add Redis and Sidekiq to your Kamal configuration.
+You've now completed the Hetzner series with a Rails application deployed on Hetzner with HTTPS enabled. For additional Kamal configuration topics, check out:
 
-**Previous articles in this series:**
-- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploy a basic Rails application using Kamal on Hetzner</a>
+- <a href="/posts/kamal-rails-series-configure-sidekiq-and-redis/">Configure Redis and Sidekiq with Kamal</a>
+- <a href="/posts/kamal-quick-commands/">Kamal Quick Commands</a>
+
+**Previous articles in this Hetzner series:**
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploy Rails application on Hetzner</a>
 - <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to your deployed Rails application</a>
 
 

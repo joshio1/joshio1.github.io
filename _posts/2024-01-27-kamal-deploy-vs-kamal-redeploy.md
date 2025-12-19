@@ -30,4 +30,6 @@ Use this command for initial deployments and when you've made infrastructure cha
 - **`kamal redeploy`**: Subsequent deployments with only application code changes (faster)
 - If `kamal redeploy` fails, `kamal deploy` is safe to use as a fallback
 
-For a complete guide to deploying Rails with Kamal, see the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.
+For complete guides to deploying Rails with Kamal, see:
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Kamal Rails on Hetzner Series</a>
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-aws/">Kamal Rails on AWS Series</a>

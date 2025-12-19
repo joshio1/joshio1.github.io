@@ -1,5 +1,5 @@
 ---
-title: "Kamal Series: Deploy Rails application on AWS"
+title: "Kamal Rails on AWS Series Part 1: Deploy Rails application on AWS"
 date: 2025-12-16 06:00:28
 categories: ['aws', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
@@ -208,11 +208,11 @@ You should see output similar to:
 - Specify the Node version in your Dockerfile to avoid "definition not found" errors
 - If your Rails application uses Postgres instead of SQLite, see the <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">next article in this series</a>
 
-## Next Part: Add Postgres to Your Rails Application
+## Next Part: Add AWS RDS to Your Rails Application
 
-So far, we've deployed a basic Rails application with SQLite. In Part 2 of this series, we'll deploy a Rails application backed by Postgres.
+So far, we've deployed a basic Rails application with SQLite. In Part 2 of this AWS series, we'll add AWS RDS as a managed database service.
 
-<a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Continue to Part 2</a>
+<a href="/posts/add-rds-to-rails-application-deplyed-using-kamal/">Continue to Part 2: Add AWS RDS</a>
 
 **NOTE**:
 

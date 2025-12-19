@@ -1,5 +1,5 @@
 ---
-title: "Kamal Series Part 2: Deploy Postgres with your Rails application"
+title: "Kamal Rails on Hetzner Series Part 2: Deploy Postgres with your Rails application"
 date: 2023-11-19 08:16:48
 categories: ['hetzner', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
@@ -100,9 +100,12 @@ kamal setup
 
 ## Next Part: Enable HTTPS
 
-So far, we've accessed the server using HTTP. In the next part, we'll configure HTTPS and SSL certificates.
+So far, we've accessed the server using HTTP. In Part 3 of this Hetzner series, we'll configure HTTPS and SSL certificates.
 
-<a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Continue to Part 3</a>
+<a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Continue to Part 3: Enable HTTPS</a>
+
+**Previous articles in this Hetzner series:**
+- <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploy Rails application on Hetzner</a>
 
 **NOTE**:
 
