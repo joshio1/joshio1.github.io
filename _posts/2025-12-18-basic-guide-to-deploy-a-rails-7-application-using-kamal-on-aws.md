@@ -219,7 +219,8 @@ After we have done making these changes, this is the final command required to d
       RAILS_MASTER_KEY="$(cat /run/secrets/RAILS_MASTER_KEY)" \
       ./bin/rails assets:precompile
     ```
-- 
+- Since we are running Kamal from a local repo, all our changes need to be committed into git so that it can be deployed. i.e. Kamal does not pick up uncommitted files.
+- Node version needs to be specific in the Dockerfile or else we will get a "definition not found" error.
 
 ## Next Part: Add Postgres to your Rails application
 
