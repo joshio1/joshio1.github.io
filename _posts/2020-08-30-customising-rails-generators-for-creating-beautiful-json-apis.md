@@ -4,7 +4,7 @@ date: 2020-08-30 11:43:24
 categories: ['Rails', 'Rails', 'Rails Generators', 'Rails JSON API Documentation', 'ruby on rails']
 ---
 
-In the previous post, <a href="https://joshio1.blog/documentation-driven-development-with-apipie/">I wrote about how we can use APIPIE to document and validate a REST API</a>. We define the request response schema format in a separate file outside of our controller which helps manage and re-use several components in the schemas.
+In the previous post, <a href="/posts/documentation-driven-development-with-apipie/">I wrote about how we can use APIPIE to document and validate a REST API</a>. We define the request response schema format in a separate file outside of our controller which helps manage and re-use several components in the schemas.
 
 However, writing the schema file whenever you develop an API is still a tedious task. Ruby on Rails provides an inherent way to solve this problem:
 
@@ -39,7 +39,7 @@ Now, let's go over all the parameters one by one and its meaning:
 
 `**controller_file**`: This parameter is to toggle whether you want to create a ***new*** controller file or not. By default a new controller file is always created. If you already have a controller file present in `app/controllers` directory and would like to add an API to an existing controller, you can pass `--no-controller-file` which would not create this controller file.
 
-`**controller_schema_files**`: As we saw in the <a href="https://joshio1.blog/documentation-driven-development-with-apipie/">previous post,</a> the API request and response schema is actually defined in files in the schema directory. This flag is to toggle the ***creation*** of those files. By default, new request/response files are always created. However, if you already have request response schema files present and would like to add new APIs to existing schema files, you can pass `--no-controller-schema-files`.
+`**controller_schema_files**`: As we saw in the <a href="/posts/documentation-driven-development-with-apipie/">previous post,</a> the API request and response schema is actually defined in files in the schema directory. This flag is to toggle the ***creation*** of those files. By default, new request/response files are always created. However, if you already have request response schema files present and would like to add new APIs to existing schema files, you can pass `--no-controller-schema-files`.
 
 `**actions**`: Actions is a list of space separated words which are nothing but the methods in our controller file. For eg. possible values can be `index`, `show`, `edit`, `create` etc. This will do these following things:
 1. Create methods for actions inside the controller file.

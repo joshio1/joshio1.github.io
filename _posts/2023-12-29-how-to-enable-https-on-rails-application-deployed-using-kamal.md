@@ -4,7 +4,7 @@ date: 2023-12-29 14:29:20
 categories: ['hetzner', 'HTTPS', 'Kamal', 'kamal', 'LetsEncrypt', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails', 'SSL']
 ---
 
-This is Part 3 of my Kamal Rails Series. So far, <a href="https://joshio1.blog/add-postgres-on-rails-application-deplyed-using-kamal/">we've deployed a Rails application and accessed the application using the HTTP protocol</a>. However, in production, we rarely do this and always deploy our application using HTTPS recommended secure way with an SSL certificate. This article is to add HTTPS and SSL configuration to our already deployed Rails application using Kamal.
+This is Part 3 of my Kamal Rails Series. So far, <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">we've deployed a Rails application and accessed the application using the HTTP protocol</a>. However, in production, we rarely do this and always deploy our application using HTTPS recommended secure way with an SSL certificate. This article is to add HTTPS and SSL configuration to our already deployed Rails application using Kamal.
 
 ## Pre-Requisites
 
@@ -97,7 +97,7 @@ root# docker network create -d bridge private
 
 ## Step 3: Change force_ssl to true in `production.rb`{: .filepath}
 
-- If you followed my <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">previous articles</a>, I had configured `config.force_ssl` to be `false` so that we can access our server using HTTP as well.
+- If you followed my <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">previous articles</a>, I had configured `config.force_ssl` to be `false` so that we can access our server using HTTP as well.
 - We need to revert this change and instead `force_ssl` should be set to `true`
 
 ```ruby
@@ -149,11 +149,11 @@ kamal app logs
 
 ## Next Part: Sidekiq and Redis
 
-- Click <a href="https://joshio1.blog/kamal-rails-series-configure-sidekiq-and-redis/">HERE</a> to read the next post where I talk about adding Redis and Sidekiq to our Kamal configuration.
+- Click <a href="/posts/kamal-rails-series-configure-sidekiq-and-redis/">HERE</a> to read the next post where I talk about adding Redis and Sidekiq to our Kamal configuration.
 - Check out these previous articles from this series:
 
-<a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploying a basic Rails application using Kamal on Hetzner</a>
-- <a href="https://joshio1.blog/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to deployed Rails application using Kamal</a>
+<a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploying a basic Rails application using Kamal on Hetzner</a>
+- <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to deployed Rails application using Kamal</a>
 
 
 

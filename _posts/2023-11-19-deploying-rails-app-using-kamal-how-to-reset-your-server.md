@@ -24,7 +24,7 @@ kamal setup
 
 Ofcourse, the other option is to just delete the server and start again from scratch by running those two commands. But deleting the server is not always an option and the above two commands should serve you well for resetting the environment.
 
-Please check <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">this article</a> for more information  on how to deploy a Rails application on a Hetzner instance.
+Please check <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">this article</a> for more information  on how to deploy a Rails application on a Hetzner instance.
 
 References:
 

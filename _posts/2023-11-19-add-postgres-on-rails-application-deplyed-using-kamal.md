@@ -4,7 +4,7 @@ date: 2023-11-19 08:16:48
 categories: ['hetzner', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
-In Part 1 of this Kamal Series, <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">we have deployed a vanilla Rails application to our remote server using Kamal</a>. A vanilla Rails application ships with SQLite as a database by default. Many times though, we use Postgres as our database. This article is to add Postgres configuration to our Rails application and deploy using Kamal. Note that we are going to deploy Postgres on the same server using Kamal where our Rails application is hosted.
+In Part 1 of this Kamal Series, <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">we have deployed a vanilla Rails application to our remote server using Kamal</a>. A vanilla Rails application ships with SQLite as a database by default. Many times though, we use Postgres as our database. This article is to add Postgres configuration to our Rails application and deploy using Kamal. Note that we are going to deploy Postgres on the same server using Kamal where our Rails application is hosted.
 
 This article assumes that you have a Rails application backed by Postgres running on your local environment. If you have some other database other than Postgres(like MySQL), you can follow the same set of instructions below and adapt them for your database provider. If you use SQLite, feel free to skip this article and go to the next part.
 
@@ -13,7 +13,7 @@ There are two ways of deploying Postgres with a Rails application:
 1. on the same VM (where the server is running)
 2. using a managed database service
 
-In this article, we are going to do it using the first option, i.e. deploying Postgres on the same server where our Rails application is hosted. If you want to use a managed database service, you can refer to <a href="https://joshio1.blog/add-rds-to-rails-application-deplyed-using-kamal/">this article</a> where I talk about using AWS RDS.
+In this article, we are going to do it using the first option, i.e. deploying Postgres on the same server where our Rails application is hosted. If you want to use a managed database service, you can refer to <a href="/posts/add-rds-to-rails-application-deplyed-using-kamal/">this article</a> where I talk about using AWS RDS.
 
 ## Step 1: Add database configuration in `deploy.yml`{: .filepath} file
 
@@ -98,10 +98,10 @@ kamal setup
 ## Next Part: Access server using HTTPS
 
 - So far, we have only accessed our remote server using HTTP.
-- <a href="https://joshio1.blog/how-to-enable-https-on-rails-application-deployed-using-kamal/">Click HERE to go to the next part to access your server using HTTPS.</a>
+- <a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Click HERE to go to the next part to access your server using HTTPS.</a>
 
 **NOTE**:
 
-- If this article is out of date, please don't hesitate to contact me on Twitter from <a href="https://joshio1.blog/about-me/">this page</a> and I'll be happy to update it.
+- If this article is out of date, please don't hesitate to contact me on Twitter from <a href="/about/">this page</a> and I'll be happy to update it.
 - Listen to <a href="https://podcasts.apple.com/ee/podcast/012-dhh-joins-the-show-to-talk-rails-8-delegated/id1677373826?i=1000626547784">this podcast</a> where DHH talks about Rails and Kamal.
 - If you would like to search for specific terms or concepts or names in Ruby/Rails podcasts, check out <a href="https://rubypodcatcher.com/">rubypodcatcher.com</a>

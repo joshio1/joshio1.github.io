@@ -10,7 +10,7 @@ This means we need to purchase our own server for deploying our Rails applicatio
 
 This is part of the Kamal Rails series. In this article, I will cover a basic way of deploying a vanilla Rails application on AWS.
 
-If you would like to deploy on the same server, check out <a href="https://joshio1.blog/add-postgres-on-rails-application-deplyed-using-kamal/">this article</a>.
+If you would like to deploy on the same server, check out <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">this article</a>.
 
 ## Pre-Requisites:
 

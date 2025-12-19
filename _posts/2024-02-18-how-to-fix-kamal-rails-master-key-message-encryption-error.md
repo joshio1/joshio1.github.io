@@ -4,7 +4,7 @@ date: 2024-02-18 13:05:36
 categories: ['Kamal', 'Rails']
 ---
 
-When <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">deploying a Rails application using Kamal</a>, we set `RAILS_MASTER_KEY` in our `.env` file. However, this `RAILS_MASTER_KEY` is for our production environment. When we try to run the same application on our development environment, we get `ActiveSupport::MessageEncryptor::InvalidMessage` error because Rails is not able to decrypt the development credentials file. This article will show you how to fix this Master Key Encryption error when using <a href="https://github.com/ddollar/foreman">foreman</a> to start the development environment.
+When <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">deploying a Rails application using Kamal</a>, we set `RAILS_MASTER_KEY` in our `.env` file. However, this `RAILS_MASTER_KEY` is for our production environment. When we try to run the same application on our development environment, we get `ActiveSupport::MessageEncryptor::InvalidMessage` error because Rails is not able to decrypt the development credentials file. This article will show you how to fix this Master Key Encryption error when using <a href="https://github.com/ddollar/foreman">foreman</a> to start the development environment.
 
 This is a typical stack trace we get when this happens:
 
@@ -51,4 +51,4 @@ exec foreman start -e .env.local -f Procfile.dev "$@"
 - In our case, this `.env` file has configuration for the production environment which are required for Kamal.
 - In our fix, we explicitly point foreman to a different "local" environment variable file which gets rid of this error.
 
-Check out <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">my Rails Kamal Series</a> for step by step guide to deploy Rails application using Kamal.
+Check out <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">my Rails Kamal Series</a> for step by step guide to deploy Rails application using Kamal.

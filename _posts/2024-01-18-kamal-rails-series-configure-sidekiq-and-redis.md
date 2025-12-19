@@ -73,7 +73,7 @@ accessories:
       network: "private"
 ```
 
-- If we don't already have a private network created on the remote server, we need to create it as shown <a href="https://joshio1.blog/how-to-enable-https-on-rails-application-deployed-using-kamal/">in a previous article in this series</a>.
+- If we don't already have a private network created on the remote server, we need to create it as shown <a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">in a previous article in this series</a>.
 
 ```bash
 docker network create -d bridge private
@@ -123,9 +123,9 @@ irb(main):005:0> DummyJob.perform_async
 - This article shows how we can deploy Sidekiq and Redis using Kamal on a Rails application. <a href="https://dev.37signals.com/introducing-solid-queue/">Rails 8 is going to use SolidQueue going forward</a> which is a new technology that uses database as a data store instead of Redis. I'll soon write about <a href="https://github.com/basecamp/solid_queue">Solid Queue</a> and Kamal.
 - Check out these previous articles from this series:
 
-<a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploying a basic Rails application using Kamal on Hetzner</a>
-- <a href="https://joshio1.blog/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to deployed Rails application using Kamal</a>
-- <a href="https://joshio1.blog/how-to-enable-https-on-rails-application-deployed-using-kamal/">Part 3: Add SSL configuration using Kamal</a>
+<a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Part 1: Deploying a basic Rails application using Kamal on Hetzner</a>
+- <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">Part 2: Add Postgres to deployed Rails application using Kamal</a>
+- <a href="/posts/how-to-enable-https-on-rails-application-deployed-using-kamal/">Part 3: Add SSL configuration using Kamal</a>
 
 
 

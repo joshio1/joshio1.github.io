@@ -32,4 +32,4 @@ As you can see from the documentation above, `kamal redeploy` just deploys the a
 - For subsequent deploys, you can use `kamal redeploy` . This should be faster since it doesn't do  bootstrapping servers, starting Traefik, pruning and registry login which are required just once.
 - If for some reason `kamal redeploy` doesn't work for subsequent deploys, feel free to use `kamal deploy`. It's not like `kamal deploy` will throw an error for subsequent deploys.
 
-If you're looking for a guide to deploy a Rails application using Kamal, check out the <a href="https://joshio1.blog/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.
+If you're looking for a guide to deploy a Rails application using Kamal, check out the <a href="/posts/basic-guide-to-deploy-a-rails-7-application-using-kamal-on-hetzner-cloud/">Rails Kamal Series</a>.
