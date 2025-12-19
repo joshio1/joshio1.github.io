@@ -1,6 +1,6 @@
 ---
 title: "Kamal Series: Deploy Rails application on AWS"
-date: 2025-12-18 06:00:28
+date: 2025-12-16 06:00:28
 categories: ['aws', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
@@ -9,8 +9,6 @@ categories: ['aws', 'kamal', 'Kamal', 'Rails', 'Rails', 'Ruby', 'ruby on rails',
 This means we need to purchase our own server for deploying our Rails application. There are several choices for purchasing like: <a href="https://www.digitalocean.com/">Digital Ocean</a> or <a href="https://aws.amazon.com/?nc2=h_lg">AWS</a> or <a href="https://www.hetzner.com/cloud">Hetzner</a>. We are going to use AWS which is widely used and has a free tier.
 
 This is part of the Kamal Rails series. In this article, I will cover a basic way of deploying a vanilla Rails application on AWS.
-
-If you would like to deploy on the same server, check out <a href="/posts/add-postgres-on-rails-application-deplyed-using-kamal/">this article</a>.
 
 ## Pre-Requisites:
 

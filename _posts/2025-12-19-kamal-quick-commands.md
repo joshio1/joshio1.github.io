@@ -1,6 +1,6 @@
 ---
 title: "Kamal Rails Series: Kamal Quick Commands"
-date: 2025-12-19 14:29:20
+date: 2025-12-15 14:29:20
 categories: ['hetzner', 'HTTPS', 'Kamal', 'kamal', 'LetsEncrypt', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails', 'SSL']
 ---
 

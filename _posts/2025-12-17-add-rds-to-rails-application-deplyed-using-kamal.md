@@ -1,6 +1,6 @@
 ---
 title: "Kamal Series: Add AWS RDS to your Rails application using Kamal"
-date: 2023-12-17 08:16:48
+date: 2025-12-17 08:16:48
 categories: ['RDS', 'AWS', 'kamal', 'Kamal', 'Postgres', 'PostgreSQL', 'Rails', 'Rails', 'Ruby', 'ruby on rails', 'RubyOnRails']
 ---
 
