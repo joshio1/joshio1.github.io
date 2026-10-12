@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<article id="about" class="px-1">
+  <h1>{{ site.social.name }}</h1>
+  <p class="about-tagline text-muted">{{ site.tagline }}</p>
+
+  <div class="content">
+    {{ content }}
+  </div>
+
+  <a href="{{ '/articles/' | relative_url }}" class="about-articles btn btn-outline-primary">
+    Blog
+    <i class="fas fa-arrow-right fa-fw ms-1"></i>
+  </a>
+
+  <nav class="about-social" aria-label="Social links">
+    {% for entry in site.data.contact %}
+      {% assign url = null %}
+      {% assign label = entry.type | capitalize %}
+
+      {% case entry.type %}
+        {% when 'github' %}
+          {% assign label = 'GitHub' %}
+          {%- capture url -%}https://github.com/{{ site.github.username }}{%- endcapture -%}
+        {% when 'twitter' %}
+          {%- capture url -%}https://twitter.com/{{ site.twitter.username }}{%- endcapture -%}
+        {% when 'email' %}
+          {%- capture url -%}mailto:{{ site.social.email }}{%- endcapture -%}
+        {% when 'rss' %}
+          {% assign label = 'RSS' %}
+          {% assign url = '/feed.xml' | relative_url %}
+        {% else %}
+          {% assign url = entry.url %}
+      {% endcase %}
+
+      {% if url %}
+        <a
+          href="{{ url }}"
+          {% unless entry.noblank %}
+            target="_blank" rel="noopener noreferrer"
+          {% endunless %}
+        >
+          <i class="{{ entry.icon }} fa-fw"></i>
+          {{ label }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</article>

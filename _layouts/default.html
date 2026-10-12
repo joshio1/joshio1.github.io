@@ -16,8 +16,8 @@ layout: compress
 <html lang="{{ page.lang | default: site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
   {% include head.html %}
 
-  <body>
-    {% if page.layout == 'home' %}
+  <body{% if page.layout == 'about' %} class="about-layout"{% endif %}>
+    {% if page.layout == 'articles' %}
       {% include sidebar.html lang=lang %}
     {% endif %}
 
